@@ -1,7 +1,6 @@
 package utils.graph.egde.undirected;
 
 import utils.graph.egde.IWeightedEdge;
-import utils.graph.egde.undirected.WeightedUndirectedEdge;
 
 import java.util.ArrayList;
 import java.util.HashMap;

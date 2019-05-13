@@ -5,13 +5,13 @@ import utils.graph.egde.directed.WeightedDirectedEdge;
 
 import java.util.*;
 
-public class BFS<T> {
+public class DFS<T> {
 
     private int[][] matrixGraph;
     private T[] nodes;
     private Map<T, List<IEdge<T>>> mapGraph;
 
-    public BFS(int[][] matrixGraph, T[] nodes) {
+    public DFS(int[][] matrixGraph, T[] nodes) {
         if(matrixGraph.length != nodes.length || matrixGraph[0].length != nodes.length) {
             throw new RuntimeException();
         }
@@ -19,7 +19,7 @@ public class BFS<T> {
         this.nodes = nodes;
     }
 
-    public BFS(Map<T, List<IEdge<T>>> mapGraph) {
+    public DFS(Map<T, List<IEdge<T>>> mapGraph) {
         this.mapGraph = mapGraph;
     }
 
@@ -36,21 +36,21 @@ public class BFS<T> {
         Set<T> toBeVisited = new HashSet<>(Arrays.asList(nodes));
         toBeVisited.remove(startNode);
 
-        Queue<T> bfsQueue = new LinkedList<>();
-        bfsQueue.add(startNode);
+        LinkedList<T> dfsStack = new LinkedList<>();
+        dfsStack.add(startNode);
 
-        while(!bfsQueue.isEmpty()) {
-            T poll = bfsQueue.poll();
-            visitOrder.add(poll);
+        while(!dfsStack.isEmpty()) {
+            T pop = dfsStack.pop();
+            visitOrder.add(pop);
 
-            int index = Arrays.asList(nodes).indexOf(poll);
+            int index = Arrays.asList(nodes).indexOf(pop);
             for (int i = 0; i < matrixGraph[index].length; i++) {
                 if(matrixGraph[index][i] != 0) {
                     T nextVisit = nodes[i];
                     if (toBeVisited.contains(nextVisit)) {
-                       toBeVisited.remove(nextVisit);
-                       bfsQueue.add(nextVisit);
-                   }
+                        toBeVisited.remove(nextVisit);
+                        dfsStack.push(nextVisit);
+                    }
                 }
             }
         }

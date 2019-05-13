@@ -7,9 +7,9 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class BFSTest {
+public class DFSTest {
 
-    private BFS<Character> bfs;
+    private DFS<Character> dfs;
 
     @Before
     public void setUp() {
@@ -21,24 +21,24 @@ public class BFSTest {
                 {0, 0,  0,  7,  0,  10},
                 {0, 0,  0,  2,  0,  0}};
         Character[] nodes = new Character[]{'A', 'B', 'C', 'D', 'E', 'F'};
-        bfs = new BFS(graph, nodes);
+        dfs = new DFS(graph, nodes);
     }
 
     @Test
     public void testBFSOnALeaf() {
-        List<Character> visit = bfs.visit('C');
+        List<Character> visit = dfs.visit('C');
         Assert.assertEquals(Arrays.asList('C'), visit);
     }
 
     @Test
     public void testBFSOnAMiddleNode() {
-        List<Character> visit = bfs.visit('E');
-        Assert.assertEquals(Arrays.asList('E', 'D', 'F'), visit);
+        List<Character> visit = dfs.visit('E');
+        Assert.assertEquals(Arrays.asList('E', 'F', 'D'), visit);
     }
 
     @Test
     public void testBFSOnFullGraph() {
-        List<Character> visit = bfs.visit('A');
-        Assert.assertEquals(Arrays.asList('A', 'B', 'C', 'D', 'E', 'F'), visit);
+        List<Character> visit = dfs.visit('A');
+        Assert.assertEquals(Arrays.asList('A', 'C', 'B', 'E', 'F', 'D'), visit);
     }
 }

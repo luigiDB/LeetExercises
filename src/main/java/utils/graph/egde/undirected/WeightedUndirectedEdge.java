@@ -54,7 +54,7 @@ public class WeightedUndirectedEdge<T> implements IWeightedEdge<T> {
     }
 
     @Override
-    public int getCost() {
+    public Integer getCost() {
         return cost;
     }
 

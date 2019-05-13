@@ -25,7 +25,7 @@ public class WeightedDirectedEdge<T> implements IWeightedEdge<T> {
     }
 
     @Override
-    public int getCost() {
+    public Integer getCost() {
         return cost;
     }
 
@@ -34,6 +34,6 @@ public class WeightedDirectedEdge<T> implements IWeightedEdge<T> {
         WeightedDirectedEdge<T> that = (WeightedDirectedEdge<T>) o;
         return this.getNodeS().equals(that.getNodeS()) &&
                 this.getNodeF().equals(that.getNodeF()) &&
-                this.getCost() == that.getCost();
+                this.getCost().equals(that.getCost());
     }
 }

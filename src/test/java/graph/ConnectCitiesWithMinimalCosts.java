@@ -2,9 +2,9 @@ package graph;
 
 import org.junit.Assert;
 import org.junit.Test;
-import utils.graph.IWeightedEdge;
-import utils.graph.UndirectedGraphConverter;
-import utils.graph.WeightedUndirectedEdge;
+import utils.graph.egde.IWeightedEdge;
+import utils.graph.egde.undirected.UndirectedGraphConverter;
+import utils.graph.egde.undirected.WeightedUndirectedEdge;
 
 import java.util.*;
 

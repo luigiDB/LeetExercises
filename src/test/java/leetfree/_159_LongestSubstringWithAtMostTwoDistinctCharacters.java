@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class _159_LongestSubstringWithAtMostTwoDistinctCharacters {
     /*Given a string, find the length of the longest substring T that contains at most 2 distinct characters.

@@ -21,38 +21,36 @@ public class _293_FlipGame {
     @Test
     public void testBaseExample() {
         String input = "++";
-        Assert.assertEquals(Arrays.asList("--"), possibleFlips(input, '+'));
+        Assert.assertEquals(Arrays.asList("--"), possibleFlips(input));
     }
 
     @Test
     public void testImpossible() {
         String input = "";
-        Assert.assertEquals(Collections.EMPTY_LIST, possibleFlips(input, '+'));
+        Assert.assertEquals(Collections.EMPTY_LIST, possibleFlips(input));
 
         input = "-+";
-        Assert.assertEquals(Collections.EMPTY_LIST, possibleFlips(input, '+'));
+        Assert.assertEquals(Collections.EMPTY_LIST, possibleFlips(input));
 
         input = "--";
-        Assert.assertEquals(Collections.EMPTY_LIST, possibleFlips(input, '+'));
+        Assert.assertEquals(Collections.EMPTY_LIST, possibleFlips(input));
     }
 
     @Test
     public void testPositiveExample() {
         String input = "++++";
-        Assert.assertEquals(Arrays.asList("--++", "+--+", "++--"), possibleFlips(input, '+'));
+        Assert.assertEquals(Arrays.asList("--++", "+--+", "++--"), possibleFlips(input));
     }
 
-    Map<Character, Character> flipRule = Map.of('+', '-', '-', '+');
-
-    private List<String> possibleFlips(String input, char c) {
+    public List<String> possibleFlips(String input) {
         List<String> result = new LinkedList<>();
 
         char[] inputArray = input.toCharArray();
         for (int i = 0; i < inputArray.length-1; i++) {
-            if (inputArray[i] == c && inputArray[i] == inputArray[i+1]) {
+            if (inputArray[i] == '+' && inputArray[i] == inputArray[i+1]) {
                 char[] flip = inputArray.clone();
-                flip[i] = flipRule.get(flip[i]);
-                flip[i+1] = flipRule.get(flip[i+1]);
+                flip[i] = '-';
+                flip[i+1] = '-';
                 result.add(String.valueOf(flip));
             }
         }

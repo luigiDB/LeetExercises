@@ -37,8 +37,10 @@ public class Dijkstra<T> {
 
     public void dijkstraDistance(T startNode) {
         Queue<IWeightedEdge> priorityQueue = new PriorityQueue<>(Comparator.comparing(IWeightedEdge::getCost));
+
         distances = new Integer[vertexes.length];
         Arrays.fill(distances, Integer.MAX_VALUE);
+
         previouses = new Integer[vertexes.length];
         Arrays.fill(previouses, 0);
 
@@ -46,19 +48,18 @@ public class Dijkstra<T> {
         distances[Arrays.asList(vertexes).indexOf(startNode)] = 0;
 
         while (!priorityQueue.isEmpty()) {
-            IWeightedEdge poll = priorityQueue.poll();
+            IWeightedEdge<T> poll = priorityQueue.poll();
 
             List<IWeightedEdge<T>> nextEdges = graph.get(poll.getNodeF());
             if (nextEdges != null)
                 for (IWeightedEdge<T> edge : nextEdges) {
-                    priorityQueue.add(edge);
-
                     int indexOfNextVertex = Arrays.asList(vertexes).indexOf(edge.getNodeF());
                     int indexOfCurrentVertex = Arrays.asList(vertexes).indexOf(edge.getNodeS());
 
                     if (distances[indexOfNextVertex] > distances[indexOfCurrentVertex] + edge.getCost()) {
                         distances[indexOfNextVertex] = distances[indexOfCurrentVertex] + edge.getCost();
                         previouses[indexOfNextVertex] = indexOfCurrentVertex;
+                        priorityQueue.add(edge);
                     }
                 }
         }

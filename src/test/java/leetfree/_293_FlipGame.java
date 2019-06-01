@@ -3,7 +3,10 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class _293_FlipGame {
     /*You are playing the following Flip Game with your friend: Given a string that contains only these two

@@ -73,17 +73,17 @@ public class _369_PlusOneLinkedList {
     private void addWithIterator(LinkedList<Integer> input) {
         ListIterator<Integer> integerListIterator = input.listIterator(input.size());
         boolean explicitBreak = false;
-        while(integerListIterator.hasPrevious()) {
+        while (integerListIterator.hasPrevious()) {
             Integer current = integerListIterator.previous();
             if (current.equals(9)) {
                 integerListIterator.set(0);
             } else {
-                integerListIterator.set(current+1);
+                integerListIterator.set(current + 1);
                 explicitBreak = true;
                 break;
             }
         }
-        if(!explicitBreak) {
+        if (!explicitBreak) {
             input.addFirst(1);
         }
     }

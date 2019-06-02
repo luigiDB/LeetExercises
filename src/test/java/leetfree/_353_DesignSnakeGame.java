@@ -3,8 +3,6 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -76,8 +74,8 @@ public class _353_DesignSnakeGame {
                 return -1;
 
             //if the snake is not elongated this turn we need to remove the tail
-            if(snakeLen == snake.size()) {
-                Point snakeTail = snake.get(snake.size()-1);
+            if (snakeLen == snake.size()) {
+                Point snakeTail = snake.get(snake.size() - 1);
                 playingMat[snakeTail.getX()][snakeTail.getY()].setFill("-");
                 snake.remove(snakeTail);
             }

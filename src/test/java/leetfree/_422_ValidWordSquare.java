@@ -59,6 +59,37 @@ public class _422_ValidWordSquare {
      */
 
     @Test
+    public void trueCasesWithString() {
+        Assert.assertTrue(isValidSquare(new String[]{"abcd",
+                "bnrt",
+                "crmy",
+                "dtye"}));
+        Assert.assertTrue(isValidSquare(new String[]{"abcd",
+                "bnrt",
+                "crm",
+                "dt"}));
+    }
+
+    @Test
+    public void falseCasesWithString() {
+        Assert.assertFalse(isValidSquare(new String[]{"ball",
+                "area",
+                "read",
+                "lady"}));
+    }
+
+    private boolean isValidSquare(char[][] words) {
+        for (int i = 0; i < words.length; i++) {
+            for (int j = i; j < words[i].length; j++) {
+                if (words[i][j] != words[j][i])
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Test
     public void trueCases() {
         Assert.assertTrue(isValidSquare(new char[][]{{'a', 'b', 'c', 'd'},
                 {'b', 'n', 'r', 't'},
@@ -78,11 +109,15 @@ public class _422_ValidWordSquare {
                 {'l', 'a', 'd', 'y'}}));
     }
 
-    private boolean isValidSquare(char[][] words) {
+    private boolean isValidSquare(String[] words) {
         for (int i = 0; i < words.length; i++) {
-            for (int j = i; j < words[i].length; j++) {
-                if(words[i][j] != words[j][i])
+            for (int j = i; j < words[i].length(); j++) {
+                try {
+                    if (words[i].charAt(j) != words[j].charAt(i))
+                        return false;
+                } catch (Exception e) {
                     return false;
+                }
             }
         }
 

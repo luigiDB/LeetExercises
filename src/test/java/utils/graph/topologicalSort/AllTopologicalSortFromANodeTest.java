@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.*;
 
 public class AllTopologicalSortFromANodeTest {
 
@@ -26,6 +25,7 @@ public class AllTopologicalSortFromANodeTest {
 
         AllTopologicalSortFromANode graphSorter = new AllTopologicalSortFromANode(edgeList, nodes);
         List<String> possibleSort = graphSorter.sort(4);
+        Assert.assertEquals(4, possibleSort.size());
         Assert.assertThat(possibleSort, containsInAnyOrder("450231", "452031", "452301", "452310"));
     }
 

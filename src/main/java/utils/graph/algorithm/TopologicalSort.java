@@ -20,8 +20,8 @@ public class TopologicalSort<T> {
         ));
     }
 
-    public List<T> sort() {
-        LinkedList<T> result = new LinkedList<>();
+    public Stack<T> sort() {
+        Stack<T> result = new Stack<>();
         Set<T> toBeVisitedNodes = new HashSet<>(Arrays.asList(nodes));
 
         while (!toBeVisitedNodes.isEmpty()) {
@@ -32,7 +32,7 @@ public class TopologicalSort<T> {
         return result;
     }
 
-    private void visit(T node, LinkedList<T> result, Set<T> toBeVisitedNodes) {
+    private void visit(T node, Stack<T> result, Set<T> toBeVisitedNodes) {
         toBeVisitedNodes.remove(node);
 
         List<IEdge<T>> nextNodes = graph.get(node);
@@ -42,6 +42,6 @@ public class TopologicalSort<T> {
                     visit(edge.getNodeF(), result, toBeVisitedNodes);
                 }
             }
-        result.addFirst(node);
+        result.push(node);
     }
 }

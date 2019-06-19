@@ -27,6 +27,7 @@ public class TopologicalSortTest {
 
         TopologicalSort topologicalSort = new TopologicalSort(edgeList, nodes);
         Stack sort = topologicalSort.sort();
+        //this step is necessary because inspecting the stack by index follow the insertion order not the popping order
         Collections.reverse(sort);
 
         Assert.assertTrue(sort.indexOf('A')<sort.indexOf('B'));

@@ -22,26 +22,32 @@ public class TopologicalSort<T> {
 
     public Stack<T> sort() {
         Stack<T> result = new Stack<>();
-        Set<T> toBeVisitedNodes = new HashSet<>(Arrays.asList(nodes));
+        Set<T> visited = new HashSet<>();
 
-        while (!toBeVisitedNodes.isEmpty()) {
-            T anyNode = toBeVisitedNodes.stream().findAny().get();
-
-            visit(anyNode, result, toBeVisitedNodes);
+        while (visited.size() != nodes.length) {
+            for (int i = 0; i < nodes.length; i++) {
+                if (!visited.contains(nodes[i])) {
+                    topologicalSort(nodes[i], result, visited);
+                }
+            }
         }
+
         return result;
     }
 
-    private void visit(T node, Stack<T> result, Set<T> toBeVisitedNodes) {
-        toBeVisitedNodes.remove(node);
+    private void topologicalSort(T node, Stack<T> result, Set<T> visited) {
+        visited.add(node);
 
-        List<IEdge<T>> nextNodes = graph.get(node);
-        if (nextNodes != null)
-            for (IEdge<T> edge : nextNodes) {
-                if (toBeVisitedNodes.contains(edge.getNodeF())) {
-                    visit(edge.getNodeF(), result, toBeVisitedNodes);
+        List<IEdge<T>> nexts = graph.get(node);
+        if(nexts != null) {
+            for(IEdge<T> next : nexts) {
+                if(!visited.contains(next.getNodeF())){
+                    topologicalSort(next.getNodeF(), result, visited);
                 }
             }
+        }
         result.push(node);
     }
 }
+
+

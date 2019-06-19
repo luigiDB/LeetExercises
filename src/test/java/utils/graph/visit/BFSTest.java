@@ -1,4 +1,4 @@
-package utils.graph.spanningTree;
+package utils.graph.visit;
 
 import org.junit.Assert;
 import org.junit.Test;

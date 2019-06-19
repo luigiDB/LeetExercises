@@ -20,8 +20,8 @@ public class WeightedUndirectedEdge<T> implements IWeightedEdge<T> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WeightedUndirectedEdge<?> edge = (WeightedUndirectedEdge<?>) o;
-        boolean partialTruth = verifyCommonNodes(o);
-        return cost == edge.cost && partialTruth;
+        boolean commonNodes = verifyCommonNodes(o);
+        return cost == edge.cost && commonNodes;
     }
 
     private boolean verifyCommonNodes(Object o) {

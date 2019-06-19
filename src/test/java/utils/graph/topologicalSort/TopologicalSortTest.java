@@ -1,4 +1,4 @@
-package utils.graph.spanningTree;
+package utils.graph.topologicalSort;
 
 import org.junit.Assert;
 import org.junit.Test;

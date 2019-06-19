@@ -22,43 +22,53 @@ public class _425_WordSquares {
      Input:
      ["area","lead","wall","lady","ball"]
      Output:
-     [
-     [ "wall",
+     "wall",
      "area",
      "lead",
      "lady"
-     ],
-     [ "ball",
+
+     "ball",
      "area",
      "lead",
      "lady"
-     ]
-     ]
      Explanation:
      The output consists of two word squares. The order of output does not matter (just the order of words in each word square matters).
      Example 2:
      Input:
      ["abat","baba","atan","atal"]
      Output:
-     [
-     [ "baba",
+     "baba",
      "abat",
      "baba",
      "atan"
-     ],
-     [ "baba",
+
+     "baba",
      "abat",
      "baba",
      "atal"
-     ]
-     ]
      Explanation:
      The output consists of two word squares. The order of output does not matter (just the order of words in each word square */
+
     @Test
-    public void validation() {
+    public void validation1() {
+        Set<String[]> possibleSquares = evaluateSpecualarSquares("area","lead","wall","lady","ball");
 
-        Set<char[][]> possibleSquares = evaluateSpecualarSquares("area","lead","wall","lady","ball");
+        Assert.assertEquals(2, possibleSquares.size());
+        Assert.assertTrue(possibleSquares.contains(new String[]{"wall","area","lead","lady"}));
+        Assert.assertTrue(possibleSquares.contains(new String[]{"ball","area","lead","lady"}));
+    }
 
-        Assert.assertTrue(possibleSquares.contains(new char[][]));
+    @Test
+    public void validation2() {
+        Set<String[]> possibleSquares = evaluateSpecualarSquares("abat","baba","atan","atal");
+
+        Assert.assertEquals(2, possibleSquares.size());
+        Assert.assertTrue(possibleSquares.contains(new String[]{"baba","abat","baba","atan"}));
+        Assert.assertTrue(possibleSquares.contains(new String[]{"baba","abat","baba","atal"}));
+    }
+
+    private Set<String[]> evaluateSpecualarSquares(String... inputs) {
+
+        return null;
     }
 }

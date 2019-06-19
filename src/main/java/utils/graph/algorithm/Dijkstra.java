@@ -8,6 +8,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Dijkstra<T> {
+    /**
+     * Dijkstra’s algorithm is a Greedy algorithm and time complexity is O(VLogV)
+     * Dijkstra doesn’t work for Graphs with negative weight edges
+     */
 
     private List<IWeightedEdge<T>> edges;
     private T[] vertexes;
@@ -26,10 +30,7 @@ public class Dijkstra<T> {
         );
     }
 
-    public List<Integer> getDistances() {
-        List<Integer> ints = Arrays.asList(distances);
-        return ints;
-    }
+    public List<Integer> getDistances() { return Arrays.asList(distances); }
 
     public List<Integer> getPreviouses() {
         return Arrays.asList(previouses);

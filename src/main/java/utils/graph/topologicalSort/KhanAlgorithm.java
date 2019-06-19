@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class KhanAlgorithm {
     /**
      * A DAG G has at least one vertex with in-degree 0 and one vertex with out-degree 0.
+     * The Idea is to keep at each iteration the node with zero fanIn.
      */
 
     private final List<IEdge<Integer>> edgeList;

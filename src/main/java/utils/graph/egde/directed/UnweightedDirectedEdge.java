@@ -6,17 +6,25 @@ import java.util.Objects;
 
 public class UnweightedDirectedEdge<T> implements IEdge<T> {
 
-    private final T nodes;
+    private final T nodeS;
     private final T nodeF;
 
-    public UnweightedDirectedEdge(T nodes, T nodeF) {
-        this.nodes = nodes;
+    public UnweightedDirectedEdge(T nodeS, T nodeF) {
+        this.nodeS = nodeS;
         this.nodeF = nodeF;
+    }
+
+    public static UnweightedDirectedEdge createEdge(char nodeS, char nodeF) {
+        return new UnweightedDirectedEdge(nodeS, nodeF);
+    }
+
+    public static UnweightedDirectedEdge createEdge(int nodeS, int nodeF) {
+        return new UnweightedDirectedEdge(nodeS, nodeF);
     }
 
     @Override
     public T getNodeS() {
-        return nodes;
+        return nodeS;
     }
 
     @Override
@@ -29,12 +37,12 @@ public class UnweightedDirectedEdge<T> implements IEdge<T> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UnweightedDirectedEdge<?> that = (UnweightedDirectedEdge<?>) o;
-        return nodes.equals(that.nodes) &&
+        return nodeS.equals(that.nodeS) &&
                 nodeF.equals(that.nodeF);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nodes, nodeF);
+        return Objects.hash(nodeS, nodeF);
     }
 }

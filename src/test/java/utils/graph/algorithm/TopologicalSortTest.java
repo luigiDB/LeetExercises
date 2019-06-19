@@ -5,8 +5,10 @@ import org.junit.Test;
 import utils.graph.egde.IWeightedEdge;
 import utils.graph.egde.directed.WeightedDirectedEdge;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 public class TopologicalSortTest {
 
@@ -23,7 +25,8 @@ public class TopologicalSortTest {
         Character[] nodes = new Character[]{'A', 'B', 'C', 'D', 'E', 'F'};
 
         TopologicalSort topologicalSort = new TopologicalSort(edgeList, nodes);
-        List sort = topologicalSort.sort();
+        Stack sort = topologicalSort.sort();
+        Collections.reverse(sort);
 
         Assert.assertTrue(sort.indexOf('A')<sort.indexOf('B'));
         Assert.assertTrue(sort.indexOf('A')<sort.indexOf('C'));

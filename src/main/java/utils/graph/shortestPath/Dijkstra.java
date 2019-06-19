@@ -1,4 +1,4 @@
-package utils.graph.algorithm;
+package utils.graph.shortestPath;
 
 import utils.graph.egde.IWeightedEdge;
 import utils.graph.egde.directed.WeightedDirectedEdge;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Dijkstra<T> {
     /**
-     * Dijkstra’s algorithm is a Greedy algorithm and time complexity is O(VLogV)
+     * Dijkstra’s spanningTree is a Greedy spanningTree and time complexity is O(VLogV)
      * Dijkstra doesn’t work for Graphs with negative weight edges
      */
 

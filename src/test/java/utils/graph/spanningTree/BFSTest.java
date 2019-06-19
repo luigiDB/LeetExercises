@@ -1,9 +1,10 @@
-package utils.graph.algorithm;
+package utils.graph.spanningTree;
 
 import org.junit.Assert;
 import org.junit.Test;
 import utils.graph.egde.IEdge;
 import utils.graph.egde.directed.WeightedDirectedEdge;
+import utils.graph.visit.BFS;
 
 import java.util.*;
 

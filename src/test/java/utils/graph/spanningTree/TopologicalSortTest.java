@@ -1,9 +1,10 @@
-package utils.graph.algorithm;
+package utils.graph.spanningTree;
 
 import org.junit.Assert;
 import org.junit.Test;
 import utils.graph.egde.IWeightedEdge;
 import utils.graph.egde.directed.WeightedDirectedEdge;
+import utils.graph.topologicalSort.TopologicalSort;
 
 import java.util.Collections;
 import java.util.LinkedList;

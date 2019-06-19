@@ -1,4 +1,4 @@
-package utils.graph.algorithm;
+package utils.graph.visit;
 
 import utils.graph.egde.IEdge;
 

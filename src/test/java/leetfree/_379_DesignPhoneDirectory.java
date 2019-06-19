@@ -3,9 +3,6 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class _379_DesignPhoneDirectory {
     /**
      * Design a Phone Directory which supports the following operations:

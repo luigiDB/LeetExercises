@@ -33,6 +33,7 @@ public class BacktrackingCircuitSearch {
     }
 
     private boolean recursiveExploration(LinkedList<Integer> path, List<LinkedList<Integer>> possiblePaths) {
+        //TODO: only find the first one neeed to be extended to search all
         String p = path.toString();
 
         if (path.getFirst().equals(path.getLast())) {

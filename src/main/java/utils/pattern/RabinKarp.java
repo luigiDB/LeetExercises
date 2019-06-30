@@ -3,6 +3,11 @@ package utils.pattern;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The average and best case running time of the Rabin-Karp algorithm is O(n+m), but its worst-case time is O(nm).
+ * Worst case of Rabin-Karp algorithm occurs when all characters of pattern and text are same as the hash values of
+ * all the substrings of txt[] match with hash value of pat[]. For example pat[] = “AAA” and txt[] = “AAAAAAA”.
+ */
 public class RabinKarp {
     /**
      * https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/

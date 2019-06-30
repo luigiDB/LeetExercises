@@ -3,6 +3,9 @@ package utils.pattern;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Worst case time complexity O(m(n-m+1))
+ */
 public class NaiveStringMatching {
 
     public static List<Integer> search(String text, String pattern) {

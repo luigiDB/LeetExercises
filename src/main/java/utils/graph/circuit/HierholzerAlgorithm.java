@@ -32,21 +32,14 @@ public class HierholzerAlgorithm {
         Stack<IEdge<Integer>> forward = new Stack<>();
         Stack<IEdge<Integer>> backtrack = new Stack<>();
 
-        IEdge<Integer> next = getNext(start);
-        while (next != null) {
-            forward.push(next);
-            next = getNext(next.getNodeF());
-        }
+        straightforwardWalk(start, forward);
+        IEdge<Integer> next;
 
         while (!forward.isEmpty()) {
             IEdge<Integer> peek = forward.pop();
             backtrack.push(peek);
 
-            next = getNext(peek.getNodeS());
-            while (next != null) {
-                forward.push(next);
-                next = getNext(next.getNodeF());
-            }
+            straightforwardWalk(peek.getNodeS(),forward);
         }
 
         List<Integer> path = new LinkedList<>();
@@ -54,6 +47,14 @@ public class HierholzerAlgorithm {
             path.add(backtrack.pop().getNodeS());
         }
         return path;
+    }
+
+    private void straightforwardWalk(Integer start, Stack<IEdge<Integer>> forward) {
+        IEdge<Integer> next = getNext(start);
+        while (next != null) {
+            forward.push(next);
+            next = getNext(next.getNodeF());
+        }
     }
 
     private IEdge<Integer> getNext(Integer nodeF) {

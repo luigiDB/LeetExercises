@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
+
 public class BacktrackingCircuitTest {
 
     @Test
@@ -40,7 +42,7 @@ public class BacktrackingCircuitTest {
 
         List<LinkedList<Integer>> circuits = circuitDiscover.discoverCircuit();
 
-        Assert.assertEquals(circuits.size(), 1);
+        Assert.assertEquals(1, circuits.size());
         Assert.assertEquals(circuits.get(0), Arrays.asList(0, 1, 3, 4, 1, 2, 0));
     }
 
@@ -62,8 +64,14 @@ public class BacktrackingCircuitTest {
 
         List<LinkedList<Integer>> circuits = circuitDiscover.discoverCircuit();
 
-        Assert.assertEquals(circuits.size(), 1);
-        Assert.assertEquals(circuits.get(0), Arrays.asList(0, 1, 2, 0, 6, 4, 2, 3, 4, 5, 0));
+        Assert.assertEquals(6, circuits.size());
+        Assert.assertThat(circuits, containsInAnyOrder(
+                Arrays.asList(0, 1, 2, 0, 6, 4, 2, 3, 4, 5, 0),
+                Arrays.asList(0, 1, 2, 3, 4, 2, 0, 6, 4, 5, 0),
+                Arrays.asList(0, 1, 2, 3, 4, 5, 0, 6, 4, 2, 0),
+                Arrays.asList(0, 6, 4, 2, 0, 1, 2, 3, 4, 5, 0),
+                Arrays.asList(0, 6, 4, 2, 3, 4, 5, 0, 1, 2, 0),
+                Arrays.asList(0, 6, 4, 5, 0, 1, 2, 3, 4, 2, 0)));
 
     }
 

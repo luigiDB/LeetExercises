@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Time complexity O(n)
+ * total time taken is O(m + n) with linear space complexity
  */
 public class KMP {
     /**

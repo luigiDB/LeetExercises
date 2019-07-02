@@ -57,11 +57,5 @@ public class BacktrackingCircuitSearch {
         Set<IEdge<Integer>> tmp = new HashSet<>(edgeList);
         tmp.removeAll(visited);
         return tmp.isEmpty();
-        /*for (Integer node : graph.keySet()) {
-            List<IEdge<Integer>> nexts = graph.get(node);
-            if (nexts != null && nexts.size() != 0)
-                return false;
-        }
-        return true;*/
     }
 }

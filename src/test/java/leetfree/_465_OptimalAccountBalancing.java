@@ -43,4 +43,5 @@ public class _465_OptimalAccountBalancing {
      *
      * Therefore, person #1 only need to give person #0 $4, and all debt is settled.
      */
+    //TODO: should be easy evaluate the balance and move cash to zeros debit and credits
 }

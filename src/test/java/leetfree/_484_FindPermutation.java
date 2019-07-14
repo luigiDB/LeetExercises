@@ -1,8 +1,16 @@
 package leetfree;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 public class _484_FindPermutation {
     /**
-     * By now, you are given a secret signature consisting of character 'D' and 'I'. 'D' represents a decreasing relationship between two numbers, 'I' represents an increasing relationship between two numbers. And our secret signature was constructed by a special integer array, which contains uniquely all the different number from 1 to n (n is the length of the secret signature plus 1). For example, the secret signature "DI" can be constructed by array [2,1,3] or [3,1,2], but won't be constructed by array [3,2,4] or [2,1,3,4], which are both illegal constructing special string that can't represent the "DI" secret signature.
+     * By now, you are given a secret signature consisting of character 'D' and 'I'. 'D' represents a decreasing
+     * relationship between two numbers, 'I' represents an increasing relationship between two numbers. And our secret
+     * signature was constructed by a special integer array, which contains uniquely all the different number from 1 to
+     * n (n is the length of the secret signature plus 1). For example, the secret signature "DI" can be constructed by
+     * array [2,1,3] or [3,1,2], but won't be constructed by array [3,2,4] or [2,1,3,4], which are both illegal
+     * constructing special string that can't represent the "DI" secret signature.
      *
      * On the other hand, now your job is to find the lexicographically smallest permutation of [1, 2, ... n] could refer to the given secret signature in the input.
      *
@@ -21,8 +29,18 @@ public class _484_FindPermutation {
      * The length of input string is a positive integer and will not exceed 10,000
      */
     /**
-     * possible solution:
-     * inti the array with sequential numbers strating from 0 and execute bbuble sort like steps to guarantee the DI
+     * TOOD: possible solution:
+     * init the array with sequential numbers starting from 0 and execute bbuble sort like steps to guarantee the DI
      * ordering
      */
+
+    @Test
+    public void tests() {
+        Assert.assertEquals(new int[]{1,2}, codePermutation("I"));
+        Assert.assertEquals(new int[]{2,1,3}, codePermutation("DI"));
+    }
+
+    private int[] codePermutation(String permutationCode) {
+        return new int[0];
+    }
 }

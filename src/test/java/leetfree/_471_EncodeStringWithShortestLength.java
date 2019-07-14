@@ -36,4 +36,6 @@ public class _471_EncodeStringWithShortestLength {
      * Output: "2[2[abbb]c]"
      * Explanation: "abbbabbbc" occurs twice, but "abbbabbbc" can also be encoded to "2[abbb]c", so one answer can be "2[2[abbb]c]".
      */
+    //TODO: this can be done using a tree of occurences and, staring from the deepest node with sequential matches,
+    // evaluating if there is a gain to actually change it 
 }

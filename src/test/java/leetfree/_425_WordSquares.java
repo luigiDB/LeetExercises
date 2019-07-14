@@ -51,7 +51,7 @@ public class _425_WordSquares {
 
     @Test
     public void validation1() {
-        Set<String[]> possibleSquares = evaluateSpecualarSquares("area","lead","wall","lady","ball");
+        Set<String[]> possibleSquares = evaluateSpecularSquares("area","lead","wall","lady","ball");
 
         Assert.assertEquals(2, possibleSquares.size());
         Assert.assertTrue(possibleSquares.contains(new String[]{"wall","area","lead","lady"}));
@@ -60,15 +60,15 @@ public class _425_WordSquares {
 
     @Test
     public void validation2() {
-        Set<String[]> possibleSquares = evaluateSpecualarSquares("abat","baba","atan","atal");
+        Set<String[]> possibleSquares = evaluateSpecularSquares("abat","baba","atan","atal");
 
         Assert.assertEquals(2, possibleSquares.size());
         Assert.assertTrue(possibleSquares.contains(new String[]{"baba","abat","baba","atan"}));
         Assert.assertTrue(possibleSquares.contains(new String[]{"baba","abat","baba","atal"}));
     }
 
-    private Set<String[]> evaluateSpecualarSquares(String... inputs) {
-
+    private Set<String[]> evaluateSpecularSquares(String... inputs) {
+        //TODO
         return null;
     }
 }

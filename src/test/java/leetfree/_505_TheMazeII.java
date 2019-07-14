@@ -72,99 +72,89 @@ public class _505_TheMazeII {
     }
 
     public int canWin(int[][] board, int startX, int startY, int endX, int endY) {
-        LinkedList<Pair> explored = new LinkedList<>();
-
         Point start = new Point(startX, startY);
         Point end = new Point(endX, endY);
 
-        return recursiveSearch(board, explored, start, end, 0);
-    }
+        int[][] distanceBoard = new int[board.length][board[0].length];
+        for (int i = 0; i < distanceBoard.length; i++) {
+            for (int j = 0; j < distanceBoard[i].length; j++) {
+                distanceBoard[i][j] = Integer.MAX_VALUE;
+            }
+        }
+        distanceBoard[startX][startY] = 0;
 
-    private int recursiveSearch(int[][] board, LinkedList<Pair> explored, Point start, Point end, int pathLength) {
+        PriorityQueue<Pair> queue = new PriorityQueue<>(Comparator.comparingInt(Pair::getDistance));
 
-        if (start.equals(end)) {
-            //valid solution
-            return pathLength;
+        queue.add(new Pair(start, 0));
+
+        while (!queue.isEmpty()) {
+            Pair poll = queue.poll();
+            List<Pair> nexts = possibleDirections(board, poll.getPoint(), distanceBoard[poll.getPoint().getX()][poll.getPoint().getY()]);
+            for (Pair p : nexts) {
+                if (distanceBoard[p.getPoint().getX()][p.getPoint().getY()] > distanceBoard[poll.getPoint().getX()][poll.getPoint().getY()] + p.getDistance()) {
+                    distanceBoard[p.getPoint().getX()][p.getPoint().getY()] = distanceBoard[poll.getPoint().getX()][poll.getPoint().getY()] + p.getDistance();
+                    queue.offer(p);
+                }
+
+            }
         }
 
-        int tmpLen = pathLength;
-        List<Pair> possibilities = possibleDirections(board, start);
-        for (Pair pair : possibilities) {
-            if (explored.contains(pair)) {
-                //loop
-                return -1;
-            }
-
-            PairDistance next = move(board, pair);
-            explored.add(pair);
-            int result = recursiveSearch(board, explored, next.getP(), end, pathLength + next.getDistance());
-            if (result != -1) {
-                tmpLen = (tmpLen != -1) ? Math.min(result, tmpLen) : result;
-            } else {
-                tmpLen = (tmpLen == -1) ? -1 : tmpLen;
-            }
-
-            explored.remove(pair);
-        }
-
-        return tmpLen;
+        return (distanceBoard[endX][endY]==Integer.MAX_VALUE)?-1:distanceBoard[endX][endY];
     }
 
-
-    private PairDistance move(int[][] board, Pair direction) {
-        Point current = direction.getP();
-        int steps = 0;
+    private Pair move(int[][] board, Point start, Direction direction) {
+        Point current = start;
+        int dist = 0;
 
         while (board[current.getX()][current.getY()] == 0) {
-            switch (direction.getDir()) {
+            switch (direction) {
                 case RIGTH:
                     if (current.getY() != (board[0].length - 1) && board[current.getX()][current.getY() + 1] == 0) {
                         current = new Point(current.getX(), current.getY() + 1);
-                        steps++;
+                        dist++;
                     } else
-                        return new PairDistance(current, steps);
+                        return new Pair(current, dist);
                     break;
                 case UP:
                     if (current.getX() != 0 && board[current.getX() - 1][current.getY()] == 0) {
                         current = new Point(current.getX() - 1, current.getY());
-                        steps++;
+                        dist++;
                     } else
-                        return new PairDistance(current, steps);
+                        return new Pair(current, dist);
                     break;
                 case LEFT:
                     if (current.getY() != 0 && board[current.getX()][current.getY() - 1] == 0) {
                         current = new Point(current.getX(), current.getY() - 1);
-                        steps++;
+                        dist++;
                     } else
-                        return new PairDistance(current, steps);
+                        return new Pair(current, dist);
                     break;
                 case DOWN:
                     if (current.getX() != (board.length - 1) && board[current.getX() + 1][current.getY()] == 0) {
                         current = new Point(current.getX() + 1, current.getY());
-                        steps++;
+                        dist++;
                     } else
-                        return new PairDistance(current, steps);
+                        return new Pair(current, dist);
                     break;
             }
         }
-
         return null;
     }
 
-    private List<Pair> possibleDirections(int[][] board, Point p) {
+    private List<Pair> possibleDirections(int[][] board, Point p, int dist) {
         List<Pair> possibilities = new LinkedList<>();
 
         if (p.getY() != (board[0].length - 1) && board[p.getX()][p.getY() + 1] != 1)
-            possibilities.add(new Pair(p, Direction.RIGTH));
+            possibilities.add(move(board, p, Direction.RIGTH));
 
         if (p.getY() != 0 && board[p.getX()][p.getY() - 1] != 1)
-            possibilities.add(new Pair(p, Direction.LEFT));
+            possibilities.add(move(board, p, Direction.LEFT));
 
         if (p.getX() != 0 && board[p.getX() - 1][p.getY()] != 1)
-            possibilities.add(new Pair(p, Direction.UP));
+            possibilities.add(move(board, p, Direction.UP));
 
         if (p.getX() != (board.length - 1) && board[p.getX() + 1][p.getY()] != 1)
-            possibilities.add(new Pair(p, Direction.DOWN));
+            possibilities.add(move(board, p, Direction.DOWN));
 
         return possibilities;
     }
@@ -185,20 +175,6 @@ public class _505_TheMazeII {
         public int getY() {
             return y;
         }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Point point = (Point) o;
-            return x == point.x &&
-                    y == point.y;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
     }
 
     enum Direction {
@@ -207,53 +183,19 @@ public class _505_TheMazeII {
 
     class Pair {
         private Point p;
-        private Direction dir;
+        private int distance;
 
-        public Pair(Point p, Direction dir) {
+        public Pair(Point p, int dir) {
             this.p = p;
-            this.dir = dir;
+            this.distance = dir;
         }
 
-        public Point getP() {
-            return p;
-        }
-
-        public Direction getDir() {
-            return dir;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Pair pair = (Pair) o;
-            return p.equals(pair.p) &&
-                    dir == pair.dir;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(p, dir);
-        }
-    }
-
-    private class PairDistance {
-
-        private Point p;
-
-        public Point getP() {
+        public Point getPoint() {
             return p;
         }
 
         public int getDistance() {
             return distance;
-        }
-
-        private int distance;
-
-        public PairDistance(Point p, int distance) {
-            this.p = p;
-            this.distance = distance;
         }
     }
 }

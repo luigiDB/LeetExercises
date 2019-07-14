@@ -77,41 +77,37 @@ public class _505_TheMazeII {
         Point start = new Point(startX, startY);
         Point end = new Point(endX, endY);
 
-        int globalMin = -1;
-        recursiveSearch(board, explored, start, end, 0, globalMin);
-
-        return globalMin;
+        return recursiveSearch(board, explored, start, end, 0);
     }
 
-    private void recursiveSearch(int[][] board, LinkedList<Pair> explored, Point start, Point end, int pathLength, int globalMin) {
+    private int recursiveSearch(int[][] board, LinkedList<Pair> explored, Point start, Point end, int pathLength) {
 
         if (start.equals(end)) {
             //valid solution
-            if (globalMin != -1) {
-                if (pathLength < globalMin) {
-                    globalMin = pathLength;
-                    return;
-                }
-            } else {
-                globalMin = pathLength;
-                return;
-            }
+            return pathLength;
         }
 
+        int tmpLen = pathLength;
         List<Pair> possibilities = possibleDirections(board, start);
         for (Pair pair : possibilities) {
             if (explored.contains(pair)) {
                 //loop
-                globalMin = (globalMin == -1) ? -1 : globalMin;
-                return;
+                return -1;
             }
 
             PairDistance next = move(board, pair);
             explored.add(pair);
-            recursiveSearch(board, explored, next.getP(), end, pathLength + next.getDistance(), globalMin);
+            int result = recursiveSearch(board, explored, next.getP(), end, pathLength + next.getDistance());
+            if (result != -1) {
+                tmpLen = (tmpLen != -1) ? Math.min(result, tmpLen) : result;
+            } else {
+                tmpLen = (tmpLen == -1) ? -1 : tmpLen;
+            }
 
             explored.remove(pair);
         }
+
+        return tmpLen;
     }
 
 

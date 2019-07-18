@@ -62,7 +62,7 @@ public class _544_OutputContestMatches {
             matches.add(new Group(i, Integer.toString(i)));
         }
 
-        for (int i = 0; i < (int) (Math.log(teamNumber) / Math.log(2)); i++) {
+        for (int i = teamNumber; i != 1; i >>= 1) {
             List<Group> nextRound = new LinkedList<>();
 
             while (matches.size() != 0) {

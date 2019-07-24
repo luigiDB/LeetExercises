@@ -26,19 +26,19 @@ public class DFSTest {
     }
 
     @Test
-    public void testBFSOnALeaf() {
+    public void testDFSOnALeaf() {
         List<Character> visit = dfs.visit('C');
         Assert.assertEquals(Arrays.asList('C'), visit);
     }
 
     @Test
-    public void testBFSOnAMiddleNode() {
+    public void testDFSOnAMiddleNode() {
         List<Character> visit = dfs.visit('E');
         Assert.assertEquals(Arrays.asList('E', 'F', 'D'), visit);
     }
 
     @Test
-    public void testBFSOnFullGraph() {
+    public void testDFSOnFullGraph() {
         List<Character> visit = dfs.visit('A');
         Assert.assertEquals(Arrays.asList('A', 'C', 'B', 'E', 'F', 'D'), visit);
     }

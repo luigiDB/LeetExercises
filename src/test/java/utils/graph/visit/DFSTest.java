@@ -3,7 +3,6 @@ package utils.graph.visit;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import utils.graph.visit.DFS;
 
 import java.util.Arrays;
 import java.util.List;

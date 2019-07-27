@@ -3,9 +3,6 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import utils.graph.visit.DFS;
-
-import java.util.*;
 
 /**
  * Given a binary tree, you need to find the length of Longest Consecutive Path in Binary Tree.

@@ -3,7 +3,10 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * There is a ball in a maze with empty spaces and walls. The ball can go through empty spaces by rolling up, down, left

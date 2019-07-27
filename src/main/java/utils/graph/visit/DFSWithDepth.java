@@ -26,12 +26,13 @@ public class DFSWithDepth<T> {
     }
 
     private int dfs(T root) {
-        int subCount = 0;
-        List<IEdge<T>> edges = matrixGraph.get(root);
-        if (edges != null)
-            for (IEdge<T> edge : edges) {
-                subCount = Math.max(subCount, dfs(edge.getNodeF())+1);
+        int depth = 0;
+        List<IEdge<T>> iEdges = matrixGraph.get(root);
+        if (iEdges != null) {
+            for (IEdge<T> edge : iEdges) {
+                depth = Math.max(depth, dfs(edge.getNodeF()) + 1);
             }
-        return subCount;
+        }
+        return depth;
     }
 }

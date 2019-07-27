@@ -14,7 +14,6 @@ public class DFSWithDepth<T> {
 
     private Map<T, List<IEdge<T>>> matrixGraph;
     private Object[] nodes;
-    int maxDepth = 0;
 
     public DFSWithDepth(Map<T, List<IEdge<T>>> matrixGraph, Object[] nodes) {
         this.matrixGraph = matrixGraph;
@@ -23,16 +22,16 @@ public class DFSWithDepth<T> {
 
 
     public int visit(T c) {
-        dfs(c, 0);
-        return maxDepth;
+        return dfs(c);
     }
 
-    private void dfs(T root, int depth) {
-        maxDepth = Math.max(maxDepth, depth);
+    private int dfs(T root) {
+        int subCount = 0;
         List<IEdge<T>> edges = matrixGraph.get(root);
         if (edges != null)
             for (IEdge<T> edge : edges) {
-                dfs(edge.getNodeF(), depth+1);
+                subCount = Math.max(subCount, dfs(edge.getNodeF())+1);
             }
+        return subCount;
     }
 }

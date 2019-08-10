@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -47,6 +46,12 @@ public class _656_CoinPath {
     }
 
     private int[] coinpath(int[] A, int B) {
+        /**
+         * Given the input array I build 2 other arrays:
+         * * Min so far array
+         * * Parent (aka. previous) lement index
+         * I'll use the first to choice the best element to use for the jump and the second to recreate the path
+         */
         int len = A.length;
         int[] minSoFar = new int[len];
         Arrays.fill(minSoFar, -1);

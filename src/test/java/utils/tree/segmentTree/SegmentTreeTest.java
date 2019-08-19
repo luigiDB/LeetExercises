@@ -1,4 +1,4 @@
-package utils.tree;
+package utils.tree.segmentTree;
 
 import org.junit.Assert;
 import org.junit.Before;

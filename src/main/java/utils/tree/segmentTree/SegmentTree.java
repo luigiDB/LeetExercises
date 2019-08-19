@@ -1,4 +1,4 @@
-package utils.tree;
+package utils.tree.segmentTree;
 
 /**
  * Credit: https://csacademy.com/lesson/segment_trees/

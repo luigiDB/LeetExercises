@@ -1,4 +1,4 @@
-package utils.tree;
+package utils.tree.segmentTree;
 
 public class SegmentTreeSum {
 

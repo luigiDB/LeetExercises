@@ -70,18 +70,48 @@ public class _298_BinaryTreeLongestConsecutiveSequence {
         Assert.assertEquals(2, maxConsecutiveSequence(root));
     }
 
+    @Test
+    public void testThatSubsequentSequencesAreNotSummed() {
+        Node root = new Node(1);
+        root.right = new Node(2);
+        root.right.right = new Node(10);
+        root.right.right.right = new Node(11);
+        root.right.right.right.right = new Node(12);
+
+        Assert.assertEquals(3, maxConsecutiveSequence(root));
+    }
+
     private int maxConsecutiveSequence(Node root) {
+        globalMax = 0;
+        int res = iterativeSearch(root);
+        return Math.max(globalMax, res);
+    }
+
+    private int globalMax = 0;
+
+    private int iterativeSearch(Node root) {
         if (root.left == null && root.right == null)
             return 1;
+
         int leftRes = 0;
-        int rightRes = 0;
         if (root.left != null) {
-            int maxLeft = maxConsecutiveSequence(root.left);
-            leftRes = root.left.data == root.data + 1 ? maxLeft + 1 : maxLeft;
+            int maxLeft = iterativeSearch(root.left);
+            if(root.left.data == root.data + 1) {
+                leftRes = maxLeft + 1;
+                globalMax = Math.max(globalMax, leftRes);
+            } else {
+                leftRes = 1;
+            }
         }
+
+        int rightRes = 0;
         if (root.right != null) {
-            int maxRight = maxConsecutiveSequence(root.right);
-            rightRes = root.right.data == root.data + 1 ? maxRight + 1 : maxRight;
+            int maxRight = iterativeSearch(root.right);
+            if(root.right.data == root.data + 1) {
+                rightRes = maxRight + 1;
+                globalMax = Math.max(globalMax, rightRes);
+            } else
+                rightRes= 1;
         }
         return Math.max(leftRes, rightRes);
     }

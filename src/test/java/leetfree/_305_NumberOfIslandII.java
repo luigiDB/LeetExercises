@@ -54,6 +54,7 @@ public class _305_NumberOfIslandII {
         Assert.assertEquals(1, islands.addLand(0,1));
         Assert.assertEquals(2, islands.addLand(1,2));
         Assert.assertEquals(3, islands.addLand(2,1));
+        Assert.assertEquals(1, islands.addLand(1,1));
     }
 
     private class WorldIsland {

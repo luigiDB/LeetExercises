@@ -21,8 +21,6 @@ import org.junit.Test;
  * The return answers should be in the same order as the original array.
  */
 public class _527_WordAbbreviation {
-    //TODO: can be resolved using a prefix trie and reading the branch inOrder
-
 
     @Test
     public void testThatIsAbleToAbbreviate() {

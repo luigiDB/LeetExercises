@@ -13,6 +13,11 @@ public class LengthOfTheLargestSubarrayWithContiguousElements {
          * 1_ order the array and after that counting the contiguous elements in O(n logn) + O(n)
          * 2_ reading the array and merge contiguous zone leveraging on disjoint sets
          */
+        /**
+         * TODO:
+         * the applied solution is inefficient
+         * it's easier to sort applying counting sort and count the consecutive numbers
+         */
         int max = input[0];
         for (int i = 0; i < input.length; i++) {
             max = Math.max(max, input[i]);

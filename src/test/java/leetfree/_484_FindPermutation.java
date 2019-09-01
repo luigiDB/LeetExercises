@@ -29,8 +29,8 @@ public class _484_FindPermutation {
      * The length of input string is a positive integer and will not exceed 10,000
      */
     /**
-     * TOOD: possible solution:
-     * init the array with sequential numbers starting from 0 and execute bbuble sort like steps to guarantee the DI
+     * TODO: possible solution:
+     * init the array with sequential numbers starting from 0 and execute bubble sort like steps to guarantee the DI
      * ordering
      */
 

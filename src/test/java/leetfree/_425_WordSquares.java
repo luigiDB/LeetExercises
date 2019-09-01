@@ -69,6 +69,9 @@ public class _425_WordSquares {
 
     private Set<String[]> evaluateSpecularSquares(String... inputs) {
         //TODO
+
+
+
         return null;
     }
 }

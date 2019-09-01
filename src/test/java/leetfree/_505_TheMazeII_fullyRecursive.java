@@ -59,7 +59,7 @@ import java.util.PriorityQueue;
  * border of the maze are all walls.
  * The maze contains at least 2 empty spaces, and both the width and height of the maze won't exceed 100.
  */
-public class _505_TheMazeII_fullyIterative {
+public class _505_TheMazeII_fullyRecursive {
 
     private int[][] board = new int[][]{{0, 0, 1, 0, 0},
             {0, 0, 0, 0, 0},

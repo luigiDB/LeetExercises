@@ -1,4 +1,4 @@
-package utils.dataStructures;
+package utils.dataStructures.disjointSet.util;
 
 public class Elem<T> {
 

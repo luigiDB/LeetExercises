@@ -1,9 +1,9 @@
-package utils.dataStructures;
+package utils.dataStructures.disjointSet.util;
 
 import java.util.HashSet;
 import java.util.Set;
 
-class PointerSet<T> {
+public class PointerSet<T> {
 
     private final Set<Elem<T>> set;
 

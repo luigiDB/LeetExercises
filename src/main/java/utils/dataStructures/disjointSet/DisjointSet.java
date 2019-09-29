@@ -1,4 +1,4 @@
-package utils.dataStructures;
+package utils.dataStructures.disjointSet;
 
 public class DisjointSet {
     /**

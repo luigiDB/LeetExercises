@@ -1,10 +1,10 @@
-package utils.dataStructures;
+package utils.dataStructures.disjointSet.util;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Set;
+import utils.dataStructures.disjointSet.util.Elem;
+import utils.dataStructures.disjointSet.util.PointerSet;
 
 public class PointerSetTest {
 

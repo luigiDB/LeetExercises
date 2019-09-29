@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Leet code 568
+ */
 public class MaximizeLeisureDays {
 
     HashMap<Integer, List<Integer>> map = new HashMap<>();

@@ -42,14 +42,22 @@ public class KhanAlgorithm {
             }
         }
 
-        khanTopoligicalSort(visited, fanIn, visitOrder);
+        while (checkNonVisitedNodes(visited))
+            khanTopologicalSort(visited, fanIn, visitOrder);
 
         return visitOrder;
     }
 
-    private void khanTopoligicalSort(boolean[] visited, int[] fanIn, List<Integer> visitOrder) {
+    private boolean checkNonVisitedNodes(boolean[] visited) {
+        for (boolean b : visited)
+            if (!b)
+                return true;
+        return false;
+    }
+
+    private void khanTopologicalSort(boolean[] visited, int[] fanIn, List<Integer> visitOrder) {
         for (int i = 0; i < nodes.length; i++) {
-            if (!visited[i] && fanIn[i] == 0){
+            if (!visited[i] && fanIn[i] == 0) {
                 visitOrder.add(i);
                 visited[i] = true;
                 List<IEdge<Integer>> nexts = graph.get(nodes[i]);
@@ -58,7 +66,6 @@ public class KhanAlgorithm {
                         fanIn[next.getNodeF()]--;
                     }
                 }
-                khanTopoligicalSort(visited, fanIn, visitOrder);
             }
         }
     }

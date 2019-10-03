@@ -53,29 +53,80 @@ public class __146_LRUCache {
 
     class LRU {
         private int size;
-        private final Map<Integer, Integer> memory;
-        private final Queue<Integer> queue;
+        private Node head = null;
+        private Node tail = null;
+        Map<Integer, Node> memory;
 
         public LRU(int size) {
             this.size = size;
             memory = new HashMap<>();
-            queue = new LinkedList<>();
-            LinkedList<Integer> pippo = new LinkedList<>();
-            PriorityQueue<Integer> pq = new PriorityQueue<>();
         }
 
         public int get(int key) {
-            Integer elem = memory.getOrDefault(key, -1);
-            queue.removeAll(Collections.singletonList(key));
-            queue.offer(key);
-            return elem;
+            Node elem = memory.get(key);
+            if (elem == null)
+                return -1;
+
+            remove(elem);
+            offer(elem);
+
+            return elem.value;
         }
 
         public void put(int key, int value) {
-            memory.compute(key, (k, v) -> value);
-            queue.offer(key);
-            if (memory.size() > size) {
-                memory.remove(queue.poll());
+            if (memory.containsKey(key)) {
+                Node node = memory.get(key);
+                node.value = value;
+                remove(node);
+                offer(node);
+            } else {
+                Node node = new Node(key, value);
+                offer(node);
+                memory.put(key, node);
+                if (memory.keySet().size() > size) {
+                    //remove head since is the oldest reference
+                    memory.remove(head.key);
+                    remove(head);
+                }
+            }
+        }
+
+        //remove it's O(1) since we have the node reference
+        private void remove(Node n) {
+            if (n.left != null) {
+                n.left.right = n.right;
+            } else {
+                head = n.right;
+            }
+
+            if (n.right != null) {
+                n.right.left = n.left;
+            } else {
+                tail = n.left;
+            }
+        }
+
+        //add to tail easier
+        private void offer(Node tmp) {
+            if (tail == null) {
+                tail = tmp;
+                head = tmp;
+            } else {
+                tail.right = tmp;
+                tmp.left = tail;
+                tail = tmp;
+            }
+        }
+
+        private class Node {
+            int key;
+            int value;
+            Node left;
+            Node right;
+
+            public Node(int key, int value) {
+                this.key = key;
+                this.value = value;
             }
         }
     }

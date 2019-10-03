@@ -57,35 +57,18 @@ public class __162_FindPeakElement {
     }
 
     private int searchPeak(int[] array, int start, int end) {
-        int middle = start + (end - start) / 2;
-        if (isPeak(array, middle)) {
-            return middle;
+        if (start == end) {
+            return start;
         }
 
-        if(start != end) {
-            int left = searchPeak(array, start, middle);
-            if (left > -1)
-                return left;
+        int middle = (end + start) / 2;
+
+        // The idea is that I only need to check if the next element is bigger than this one to classify it as a peak
+        // and the two branches of the if will converge to the peak from left and right.
+        if (array[middle] > array[middle + 1]) {
+            return searchPeak(array, start, middle);
+        } else {
+            return searchPeak(array, middle + 1, end);
         }
-
-        if(middle+1 <= end) {
-            int right = searchPeak(array, middle + 1, end);
-            if (right > -1)
-                return right;
-        }
-
-        return -1;
-    }
-
-    private boolean isPeak(int[] array, int middle) {
-
-        if (middle == 0) {
-            return array[middle] > array[middle + 1];
-        }
-
-        if (middle == array.length - 1)
-            return array[middle] > array[middle - 1];
-
-        return array[middle] > array[middle - 1] && array[middle] > array[middle + 1];
     }
 }

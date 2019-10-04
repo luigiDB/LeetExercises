@@ -1,8 +1,7 @@
 package leetfree;
 
-public class _362_DesignHitCounter {
-    /*
-    * Design a hit counter which counts the number of hits received in the past 5 minutes.
+/*
+Design a hit counter which counts the number of hits received in the past 5 minutes.
     Each function accepts a timestamp parameter (in seconds granularity) and you may assume that calls are being made
     * to the system in chronological order (ie, the timestamp is monotonically increasing). You may assume that the
     * earliest timestamp starts at 1.
@@ -24,7 +23,11 @@ public class _362_DesignHitCounter {
     // get hits at timestamp 301, should return 3.
     counter.getHits(301);
     Follow up:
-    What if the number of hits per second could be very large? Does your design scale?*/
+    What if the number of hits per second could be very large? Does your design scale?
+ */
+public class _362_DesignHitCounter {
+    // One possible analisys https://leetcode.com/discuss/interview-question/system-design/178662/Design-a-Hit-Counter
 
+    //TODO:
 
 }

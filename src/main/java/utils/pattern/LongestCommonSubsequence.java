@@ -11,5 +11,7 @@ package utils.pattern;
  * + buld the LCS matrix 2 string at the time and merge results
  */
 public class LongestCommonSubsequence {
-    //TODO
+    /*
+    See es 1143 for an iterative implementation
+     */
 }

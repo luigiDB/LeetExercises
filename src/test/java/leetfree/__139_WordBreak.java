@@ -1,7 +1,8 @@
 package leetfree;
 
 /**
- * Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+ * Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be
+ * segmented into a space-separated sequence of one or more dictionary words.
  *
  * Note:
  *
@@ -35,5 +36,22 @@ public class __139_WordBreak {
      *      3_ k <= x there two routes:
      *          1_ drop the range
      *          2_ remove [x, y] and return to point 1  <== i'm not sure on this step surely the first approach works
+     */
+    /*
+    Faster DP solution
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> wordDictSet=new HashSet(wordDict);
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && wordDictSet.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
      */
 }

@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.function.Function;
 
 import static org.hamcrest.Matchers.contains;
 
@@ -39,43 +38,58 @@ public class _1096_BraceExpansionII {
 
     @Test
     public void baseExpansion() {
-        Assert.assertThat(R("{a}"), contains("a"));
-        Assert.assertThat(R("{ab}"), contains("ab"));
+        Assert.assertThat(braceExpansionII("{a}"), contains("a"));
+        Assert.assertThat(braceExpansionII("{ab}"), contains("ab"));
     }
 
     @Test
     public void baseExpansion2() {
-        Assert.assertThat(R("a"), contains("a"));
-        Assert.assertThat(R("ab"), contains("ab"));
+        Assert.assertThat(braceExpansionII("a"), contains("a"));
+        Assert.assertThat(braceExpansionII("ab"), contains("ab"));
     }
 
     @Test
     public void baseUnion() {
-        Assert.assertThat(R("{a,b,c}"), contains("a", "b", "c"));
-        Assert.assertThat(R("{{a},{b}}"), contains("a", "b"));
+        Assert.assertThat(braceExpansionII("{a,b,c}"), contains("a", "b", "c"));
+        Assert.assertThat(braceExpansionII("{{a},{b}}"), contains("a", "b"));
     }
 
     @Test
     public void baseMultiplication() {
-        Assert.assertThat(R("{{a}{b}}"), contains("ab"));
+        Assert.assertThat(braceExpansionII("{{a}{b}}"), contains("ab"));
     }
 
     @Test
     public void baseLetterMultiplication() {
-        Assert.assertThat(R("a{b,c}"), contains("ab", "ac"));
+        Assert.assertThat(braceExpansionII("a{b,c}"), contains("ab", "ac"));
     }
 
     @Test
     public void complexTest() {
-        Assert.assertThat(R("{a,b}{c,{d,e}}"), contains("ac", "ad", "ae", "bc", "bd", "be"));
+        Assert.assertThat(braceExpansionII("{a,b}{c,{d,e}}"), contains("ac", "ad", "ae", "bc", "bd", "be"));
     }
 
     @Test
     public void complexTest2() {
-        Assert.assertThat(R("{{a,z},a{b,c},{ab,z}}"), contains("a", "ab", "ac", "z"));
+        Assert.assertThat(braceExpansionII("{{a,z},a{b,c},{ab,z}}"), contains("a", "ab", "ac", "z"));
     }
 
-    private List<String> R(String in) {
+    @Test
+    public void complexTest3() {
+        Assert.assertThat(braceExpansionII("{a,b}c{d,e}f"), contains("acdf", "acef", "bcdf", "bcef"));
+    }
+
+    /**
+     * The trick is that the comma is associative on the left while the parentesys is associative on the right. A
+     * simple way to handle this is to push in stack any result obtained until now anytime a comma is encoutered and
+     * we need to multiply the current sets with the stack head anytime two blocks meet without commas.
+     * Where a block can be either a charcter (or a group of contiguos characters) and a couple of valid brackets.
+     *
+     * Little clarification my code doesn't include any check for the validity of the string I'll give for granted that the string is valid
+     * @param in
+     * @return
+     */
+    public List<String> braceExpansionII(String in) {
         List<String> sortedlist = new ArrayList<>();
         sortedlist.addAll(RIn(in));
         sortedlist.sort(Comparator.comparing(String::toString));
@@ -85,6 +99,7 @@ public class _1096_BraceExpansionII {
     private Set<String> RIn(String in) {
         Set<String> res = new HashSet<>();
 
+        Stack<Set<String>> stack = new Stack<>();
         boolean previouComma = false;
         int i = 0;
         while (i < in.length()) {
@@ -92,16 +107,17 @@ public class _1096_BraceExpansionII {
                 case '{':
                     int closingBracketPos = findClosingBracket(in, i);
                     Set<String> innerRes = RIn(in.substring(i + 1, closingBracketPos));
-                    if(previouComma) {
+                    if (previouComma) {
                         res.addAll(innerRes);
                         previouComma = false;
-                    }
-                    else
+                    } else
                         res = zipLists(res, innerRes);
                     i = closingBracketPos + 1;
                     break;
                 case ',':
                     previouComma = true;
+                    stack.push(res);
+                    res = new HashSet<>();
                     i++;
                     break;
                 default:
@@ -114,21 +130,32 @@ public class _1096_BraceExpansionII {
                             break;
                         }
                     }
-                    res.add(tmp.toString());
+                    if (previouComma) {
+                        res.add(tmp.toString());
+                    } else {
+                        HashSet<String> support = new HashSet<>();
+                        support.add(tmp.toString());
+                        res = zipLists(res, support);
+                    }
                     i = secondIndex;
+                    previouComma = false;
                     break;
             }
+        }
+
+        while (!stack.isEmpty()) {
+            res.addAll(stack.pop());
         }
         return res;
     }
 
     private Set<String> zipLists(Set<String> first, Set<String> second) {
-        if(first.isEmpty())
+        if (first.isEmpty())
             return second;
         Set<String> zip = new HashSet<>();
-        for (String f: first) {
-            for (String s: second) {
-                zip.add(f+s);
+        for (String f : first) {
+            for (String s : second) {
+                zip.add(f + s);
             }
         }
         return zip;

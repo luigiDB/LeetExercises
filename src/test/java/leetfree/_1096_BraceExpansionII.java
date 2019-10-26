@@ -100,22 +100,22 @@ public class _1096_BraceExpansionII {
         Set<String> res = new HashSet<>();
 
         Stack<Set<String>> stack = new Stack<>();
-        boolean previouComma = false;
+        boolean previousComma = false;
         int i = 0;
         while (i < in.length()) {
             switch (in.charAt(i)) {
                 case '{':
                     int closingBracketPos = findClosingBracket(in, i);
                     Set<String> innerRes = RIn(in.substring(i + 1, closingBracketPos));
-                    if (previouComma) {
+                    if (previousComma) {
                         res.addAll(innerRes);
-                        previouComma = false;
+                        previousComma = false;
                     } else
                         res = zipLists(res, innerRes);
                     i = closingBracketPos + 1;
                     break;
                 case ',':
-                    previouComma = true;
+                    previousComma = true;
                     stack.push(res);
                     res = new HashSet<>();
                     i++;
@@ -130,7 +130,7 @@ public class _1096_BraceExpansionII {
                             break;
                         }
                     }
-                    if (previouComma) {
+                    if (previousComma) {
                         res.add(tmp.toString());
                     } else {
                         HashSet<String> support = new HashSet<>();
@@ -138,7 +138,7 @@ public class _1096_BraceExpansionII {
                         res = zipLists(res, support);
                     }
                     i = secondIndex;
-                    previouComma = false;
+                    previousComma = false;
                     break;
             }
         }

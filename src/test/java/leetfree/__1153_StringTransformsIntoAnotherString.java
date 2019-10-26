@@ -22,6 +22,20 @@ Note:
 Both str1 and str2 contain only lowercase English letters.
  */
 public class __1153_StringTransformsIntoAnotherString {
+
+    /*
+    MUCH EASIER SOLUTION
+     public boolean canConvert(String s1, String s2) {
+        if (s1.equals(s2)) return true;
+        Map<Character, Character> dp = new HashMap<>();
+        for (int i = 0; i < s1.length(); ++i) {
+            if (dp.getOrDefault(s1.charAt(i), s2.charAt(i)) != s2.charAt(i))
+                return false;
+            dp.put(s1.charAt(i), s2.charAt(i));
+        }
+        return new HashSet<Character>(dp.values()).size() < 26;
+    }
+     */
     @Test
     public void impossibleTest() {
         Assert.assertFalse(canConvert("leetcode", "codeleet"));
@@ -42,38 +56,53 @@ public class __1153_StringTransformsIntoAnotherString {
         Assert.assertFalse(canConvert("aabaa", "ccbaa"));
     }
 
+    @Test
+    public void impossibleForCharacterExhaustion() {
+        Assert.assertFalse(canConvert("abcdefghijklmnopqrstuvwxyz", "bcdefghijklmnopqrstuvwxyza"));
+    }
+
+    @Test
+    public void possibleNearCharacterExhaustion() {
+        Assert.assertTrue(canConvert("abcdefghijklmnopqrstuvwxyz", "bcdefghijklmnopqrstuvwxyzq"));
+    }
+
+    @Test
+    public void validExhaustion() {
+        Assert.assertTrue(canConvert("abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz"));
+    }
+
     public boolean canConvert(String str1, String str2) {
+        if (str1.equals(str2))
+            return true;                // this is dump but resolve a lot of problems
         List<Integer> s1 = toIntegerList(str1);
         List<Integer> s2 = toIntegerList(str2);
         Map<Integer, Integer> mappingScheme = new HashMap<>();
-        Set<Integer> visited = new HashSet<>();
+        Set<Integer> codomain = new HashSet<>();
 
         for (int i = 0; i < s1.size(); i++) {
             if (s1.get(i).equals(s2.get(i))) {
-                visited.add(s1.get(i));
-                continue;
+                codomain.add(s2.get(i));
             } else {
-                if (mappingScheme.get(s1.get(i)) != null && mappingScheme.get(s1.get(i)).equals(s2.get(i))) {
-                    continue;
-                } else {
-                    if (visited.contains(s1.get(i)))
+                if (mappingScheme.get(s1.get(i)) == null || !mappingScheme.get(s1.get(i)).equals(s2.get(i))) {
+                    if (codomain.contains(s1.get(i)))
                         return false;
                     mappingScheme.put(s1.get(i), s2.get(i));
+                    codomain.add(s2.get(i));
                 }
             }
         }
-
-        return true;
+        return (codomain.size() < 26); // mapping can never be valid if we need visit all chars
     }
 
     private List<Integer> toIntegerList(String s) {
         LinkedList<Integer> list = new LinkedList<>();
-        //can be done more efficiently with an array containing for each char the numerical mapping
-        Map<Character, Integer> map = new HashMap<>();
+        int[] mapArray = new int['z' - 'a' + 1];
+        int counter = 1;
 
         for (int i = 0; i < s.length(); i++) {
-            Integer number = map.getOrDefault(s.charAt(i), map.size());
-            map.putIfAbsent(s.charAt(i), number);
+            int index = s.charAt(i) - 'a';
+            Integer number = (mapArray[index] == 0) ? counter++ : mapArray[index];
+            mapArray[index] = number;
             list.addLast(number);
         }
         return list;

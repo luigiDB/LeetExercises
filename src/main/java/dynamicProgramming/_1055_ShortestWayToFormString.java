@@ -1,7 +1,6 @@
 package dynamicProgramming;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 
 /**
  * From any string, we can form a subsequence of that string by deleting some number of characters (possibly
@@ -11,6 +10,34 @@ import java.util.LinkedList;
  */
 public class _1055_ShortestWayToFormString {
 
+    /**
+     * TODO:
+     * Is the greedy solution viable? Are you able to write an example in which the greedy solution is not the
+     * optimal solution.
+     */
+    /*
+    public int greedySolution(String source, String target) {
+        if (source.equals(target)) return 1;
+        int k = source.length();
+        int n = target.length();
+        int ans = 0;
+        int i = 0;
+        while (i < n) {
+            int base = i;
+            int j = 0;
+            while (j < k) {
+                if (i < n && source.charAt(j) == target.charAt(i)) {
+                    i++;
+                }
+                j++;
+            }
+            if (i == base) return -1;
+
+            ans++;
+        }
+        return ans;
+    }
+     */
     public int evaluate(String source, String target) {
         int[] minSteps = new int[target.length()];
         Arrays.fill(minSteps, -1);

@@ -35,7 +35,6 @@ public class __843_GuessTheWord {
 
         int n = wordlist.length;
         int l = wordlist[0].length();
-        int[][] f = new int[n][n];
 
         Set<Integer> possible = new HashSet<>();
         for (int i = 0; i < n; i++) {

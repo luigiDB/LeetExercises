@@ -3,6 +3,8 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.LinkedList;
+
 /*
 Implement the StreamChecker class as follows:
 StreamChecker(words): Constructor, init the data structure with the given words.
@@ -85,27 +87,31 @@ public class __1032_StreamOfCharacters {
     class StreamChecker {
 
         private final TrieNode root;
-        private TrieNode current;
+        private int trieDepth;
+        private final LinkedList<Character> lastInputs;
 
         public StreamChecker(String[] words) {
             root = new TrieNode();
+            trieDepth = Integer.MIN_VALUE;
             for (String word : words)
-                root.addWord(word);
-            current = root;
+                trieDepth = Math.max(trieDepth, root.addWord(word, 0));
+            lastInputs = new LinkedList<>();
         }
 
         public boolean query(char letter) {
-            TrieNode tmp = current.getNext(letter);
-            if (tmp == null) {
-                if (root.getNext(letter) == null)
-                    current = root;
-                else
-                    current = root.getNext(letter);
-                return false;
-            } else {
-                current = tmp;
-                return tmp.isEndOfTheWord();
+            lastInputs.addLast(letter);
+            while (lastInputs.size() > trieDepth)
+                lastInputs.removeFirst();
+
+            TrieNode support = root;
+            for (int i = lastInputs.size() - 1; i >= 0; i--) {
+                support = support.getNext(lastInputs.get(i));
+                if (support == null)
+                    return false;
+                if (support.isEndOfTheWord())
+                    return true;
             }
+            return false;
         }
 
         private class TrieNode {
@@ -118,16 +124,18 @@ public class __1032_StreamOfCharacters {
                 isEndOfTheWord = false;
             }
 
-            public void addWord(String word) {
-                if (trieNodes[word.charAt(0) - 'a'] == null)
-                    trieNodes[word.charAt(0) - 'a'] = new TrieNode();
-                TrieNode next = trieNodes[word.charAt(0) - 'a'];
+            public int addWord(String word, int depth) {
+                int lastChar = word.charAt(word.length() - 1) - 'a';
+                if (trieNodes[lastChar] == null)
+                    trieNodes[lastChar] = new TrieNode();
+                TrieNode next = trieNodes[lastChar];
                 if (word.length() == 1) {
                     //if this is the last letter we mark the node as word end
                     next.isEndOfTheWord = true;
                 } else {
-                    next.addWord(word.substring(1));
+                    return next.addWord(word.substring(0, word.length() - 1), depth + 1);
                 }
+                return depth + 1;
             }
 
             public TrieNode getNext(char next) {

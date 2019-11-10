@@ -35,6 +35,8 @@ public class __1088_ConfusingNumberII {
      * 3_ build all the numbers with 0,1,6,8,9 with a simple recursion and count the valid ones
      * 2_ given all the strobogrammatic numbers of 1 and 2 digits evaluate all the others by extending the second
      * precending with 2 strobogrammatic digits until we meet a number > N
+     * 3_ given the number of ciphers we can build from external to the middle using the valid couple of numbers
+     * {0,0}{1,1}{8,8}{6,9}{9,6}
      */
 
     //Example for the approach 2

@@ -1,8 +1,10 @@
 package leetfree;
 /*
-There is a box protected by a password. The password is a sequence of n digits where each digit can be one of the first k digits 0, 1, ..., k-1.
+There is a box protected by a password. The password is a sequence of n digits where each digit can be one of the
+first k digits 0, 1, ..., k-1.
 While entering a password, the last n digits entered will automatically be matched against the correct password.
-For example, assuming the correct password is "345", if you type "012345", the box will open because the correct password matches the suffix of the entered password.
+For example, assuming the correct password is "345", if you type "012345", the box will open because the correct
+password matches the suffix of the entered password.
 Return any password of minimum length that is guaranteed to open the box at some point of entering it.
 Example 1:
 Input: n = 1, k = 2
@@ -19,7 +21,7 @@ k^n will be at most 4096.
  */
 public class __753_CrackingTheSafe {
     /**
-     * Create a string with all the possible sequence one after the other (can be obtained by a simple double for).
+     * Create a string with all the possible sequence one after the other (can be obtained recursively).
      * At this point using a sliding windows of size n and a set to avoid repetition iterate over the above string
      * deleting the n-1 char of each window if the pattern is already covered.
      * n = 2, k = 3

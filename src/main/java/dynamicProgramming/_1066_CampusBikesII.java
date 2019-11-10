@@ -30,7 +30,9 @@ public class _1066_CampusBikesII {
         for (int i = 0; i < bikes.length; i++) {
             if (!used[i]) {
                 used[i] = true;
-                distance = Math.min(distance, minDistance(workers, bikes, worker + 1, used) + manHattanDistance(workers[worker], bikes[i]));
+                distance = Math.min(distance,
+                        minDistance(workers, bikes, worker + 1, used) + manhattanDistance(workers[worker], bikes[i])
+                );
                 used[i] = false;
             }
         }
@@ -39,7 +41,7 @@ public class _1066_CampusBikesII {
         return distance;
     }
 
-    private int manHattanDistance(int[] A, int[] B) {
+    private int manhattanDistance(int[] A, int[] B) {
         return Math.abs(A[0] - B[0]) + Math.abs(A[1] - B[1]);
     }
 }

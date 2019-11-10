@@ -30,8 +30,11 @@ public class __947_MostStonesRemovedWithSameRowOrColumn {
      *     nexts.removeAll(visited)
      *     if(nexts.isEmpty) return moves;
      *     int max = Integers.MIN;
-     *     for (point p2: nexts)
-     *          max = Math.max(max, foo(moves+1, visited + P, p2))
+     *     for (point p2: nexts) {
+     *          visited.add(P)
+     *          max = Math.max(max, foo(moves+1, visited, p2))
+     *          visited.remove(P)
+     *     }
      *     return max;
      * }
      */

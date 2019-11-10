@@ -49,7 +49,7 @@ public class __222_CountCompleteTreeNodes {
     // Last level nodes are enumerated from 0 to 2**d - 1 (left -> right).
     // Return True if last level node idx exists.
     // Binary search with O(d) complexity.
-    public boolean exists(int idx, int d, TreeNode node) {
+    private boolean exists(int idx, int d, TreeNode node) {
         int left = 0, right = (int) Math.pow(2, d) - 1;
         int pivot;
         for (int i = 0; i < d; ++i) {

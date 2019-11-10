@@ -1,1 +1,4 @@
 *.class
+/.idea/
+/target/test-classes/META-INF/exercises.kotlin_module
+/target/classes/META-INF/exercises.kotlin_module

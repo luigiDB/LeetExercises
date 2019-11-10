@@ -1,0 +1,45 @@
+https://courses.lumenlearning.com/math4liberalarts/chapter/introduction-euler-paths/
+
+EULER CIRCUITS AND PATHS
+==========================
+
+Euler Paths
+An Euler path is a path that uses every edge in a graph with no repeats. Being a path, it does not have to return to
+the starting vertex.
+
+Euler Circuits
+An Euler circuit is a circuit that uses every edge in a graph with no repeats. Being a circuit, it must start and end
+at the same vertex.
+
+EULER’S PATH AND CIRCUIT THEOREMS
+A graph will contain an Euler path if it contains at most two vertices of odd degree.
+A graph will contain an Euler circuit if all vertices have even degree
+
+FLEURY’S ALGORITHM
+1. Start at any vertex if finding an Euler circuit. If finding an Euler path, start at one of the two vertices with
+    odd degree.
+2. Choose any edge leaving your current vertex, provided deleting that edge will not separate the graph into two
+    disconnected sets of edges. (in a real scenario the algorithm can make any choice since with backtracking we can
+    cover other paths).
+3. Add that edge to your circuit, and delete it from the graph.
+4. Continue until you’re done.
+
+
+
+HAMILTONIAN CIRCUITS AND PATHS
+==========================
+A Hamiltonian circuit is a circuit that visits every vertex once with no repeats. Being a circuit, it must start and end
+at the same vertex. A Hamiltonian path also visits every vertex once with no repeats, but does not have to start and
+end at the same vertex.
+
+
+BRUTE FORCE ALGORITHM (A.K.A. EXHAUSTIVE SEARCH)
+1.     List all possible Hamiltonian circuits
+2.     Find the length of each circuit by adding the edge weights
+3.     Select the circuit with minimal total weight.
+
+NEAREST NEIGHBOR ALGORITHM (NNA)
+1.     Select a starting point.
+2.     Move to the nearest unvisited vertex (the edge with smallest weight).
+3.     Repeat until the circuit is complete.
+

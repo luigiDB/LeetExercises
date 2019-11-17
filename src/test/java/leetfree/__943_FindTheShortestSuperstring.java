@@ -24,7 +24,7 @@ public class __943_FindTheShortestSuperstring {
      *
      * where
      * foo(node, visited, Stringbuilder)
-     *      List<Pair<SUPERIMPOSEDCOUNT, NODES></SUPERIMPOSEDCOUNT,>> possibleNextSteps = ***look after***
+     *      List<Pair<SUPERIMPOSEDCOUNT, NODES>> possibleNextSteps = ***look after***
      *      for each possibleNextStep:
      *          foo(    possibleNextStep.secondNode,
      *                  visited + possibleNextStep.secondNode,

@@ -2,3 +2,23 @@ __200_NumberOfIslands
 _305_NumberOfIslandII
 __947_MostStonesRemovedWithSameRowOrColumn
 _323_NumberOfConnectedComponentsInAnUndirectedGraph
+
+
+
+FIND implementations:
+1_ classical recursive implementation
+private int find(int[] parent, int node) {
+    int pivot = node;
+    while (parent[pivot] != -1) {
+        pivot = parent[pivot];
+    }
+    return pivot;
+}
+
+
+2_ recursive with continuos rewriting of the parent array this way over time the depth of the parent tree became 1
+public int find(int x) {
+    if (parent[x] != x)
+        parent[x] = find(parent[x]);
+    return parent[x];
+}

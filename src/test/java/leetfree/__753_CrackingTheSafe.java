@@ -19,6 +19,10 @@ n will be in the range [1, 4].
 k will be in the range [1, 10].
 k^n will be at most 4096.
  */
+
+/**
+ * Reference {@link utils.graph.circuit.HierholzerAlgorithm}
+ */
 public class __753_CrackingTheSafe {
     /**
      * Create a string with all the possible sequence one after the other (can be obtained recursively).

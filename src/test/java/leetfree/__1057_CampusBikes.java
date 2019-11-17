@@ -24,7 +24,8 @@ Example 2:
 Input: workers = [[0,0],[1,1],[2,0]], bikes = [[1,0],[2,2],[2,1]]
 Output: [0,2,1]
 Explanation:
-Worker 0 grabs Bike 0 at first. Worker 1 and Worker 2 share the same distance to Bike 2, thus Worker 1 is assigned to Bike 2, and Worker 2 will take Bike 1. So the output is [0,2,1].
+Worker 0 grabs Bike 0 at first. Worker 1 and Worker 2 share the same distance to Bike 2, thus Worker 1 is assigned to
+Bike 2, and Worker 2 will take Bike 1. So the output is [0,2,1].
 Note:
 0 <= workers[i][j], bikes[i][j] < 1000
 All worker and bike locations are distinct.

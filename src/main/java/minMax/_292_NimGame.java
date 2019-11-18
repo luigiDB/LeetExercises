@@ -1,4 +1,4 @@
-package utils.minMax;
+package minMax;
 
 /*
 You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you
@@ -20,14 +20,14 @@ public class _292_NimGame {
         boolean p1 = true, p2 = true, p3 = true;
 
         for (int i = 4; i <= n; i++) {
-            if (!p1 || !p2 || !p3) { // check if any of the pi's is a losing state
+            if (p1 & p2 & p3) { // check if any of the pi's is a losing state
                 p1 = p2;
                 p2 = p3;
-                p3 = true; // if yes, the current state becomes winning state
+                p3 = false; // if yes, the current state becomes winning state
             } else {
                 p1 = p2;
                 p2 = p3;
-                p3 = false; // otherwise it's a losing state.
+                p3 = true; // otherwise it's a losing state.
             }
         }
         return p3;

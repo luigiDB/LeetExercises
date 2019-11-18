@@ -1,4 +1,7 @@
-package leetfree;
+package minMax;
+
+import java.util.Arrays;
+
 /*
 A game on an undirected graph is played by two players, Mouse and Cat, who alternate turns.
 The graph is given as follows: graph[a] is a list of all nodes b such that ab is an edge of the graph.
@@ -30,77 +33,80 @@ public class __913_CatAndMouse {
     https://pdfs.semanticscholar.org/2ee6/17f10fa115a94ff7b59a6120ff33dd1dde87.pdf
     https://cp-algorithms.com/game_theory/games_on_graphs.html
      */
-    /*
-    Only DFS solution
-    class Solution
-{
-    public int catMouseGame(int[][] graph)
-    {
-        int n = graph.length;
-        int[][][] f = new int[n + n][n][n];
-        fill(f, -1);
 
-        return find(graph, f, 0, 1, 2);
-    }
-    X is the mouse y the cat
-    int find(int[][] graph, int[][][] f, int t, int x , int y )
-    {
-        if (t == graph.length * 2) return 0; // draw
-        if (x == 0) return 1; // mouse wins
-        if (x == y) return 2; // cat wins
-        if (f[t][x][y] != -1) return f[t][x][y];
+    class Solution {
+        public int catMouseGame(int[][] graph) {
+            int n = graph.length;
+            int[][][] f = new int[n + n][n][n];
+            fill(f, -1);
 
-        if (t % 2 == 0)
-        {
-            boolean cat_win = true;
-            for (int next : graph[x])
-            {
-                int r = find(graph, f, t + 1, next, y);
-                if (r == 1)
-                {
-                    return f[t][x][y] = 1;
-                }
-                if (r == 0)
-                {
-                    cat_win = false;
-                }
-            }
-            if (cat_win) return f[t][x][y] = 2;
-            else return f[t][x][y] = 0;
+            return find(graph, f, 0, 1, 2);
         }
-        else
-        {
-            // cat moves
-            // the analysis is similar as above.
-            boolean mouse_win = true;
-            for (int next : graph[y])
-            {
-                if (next == 0) continue; // cat cannot go to hole
-                int r = find(graph, f, t + 1, x, next);
-                if (r == 2)
-                {
+
+        /**
+         * @param graph
+         * @param f
+         * @param t
+         * @param x     mouse
+         * @param y     cat
+         * @return      0: DRAW, 1: MOUSE, 2: CAT
+         *              The Mouse logic is that if in the next steps i found at least one path where mouse win the mouse
+         *              pick that path, the cat node only wins if all the next steps are determining the cat winning.
+         */
+        int find(int[][] graph, int[][][] f, int t, int x, int y) {
+            if (t == graph.length * 2)
+                return 0; // draw
+            if (x == 0)
+                return 1; // mouse wins
+            if (x == y)
+                return 2; // cat wins
+            if (f[t][x][y] != -1)
+                return f[t][x][y];
+
+            if (t % 2 == 0) {
+                //mouse move
+                boolean cat_win = true;
+                for (int next : graph[x]) {
+                    int r = find(graph, f, t + 1, next, y);
+                    if (r == 1) {
+                        return f[t][x][y] = 1;
+                    }
+                    if (r == 0) {
+                        cat_win = false;
+                    }
+                }
+                if (cat_win)
                     return f[t][x][y] = 2;
+                else
+                    return f[t][x][y] = 0;
+            } else {
+                // cat moves
+                // the analysis is similar as above.
+                boolean mouse_win = true;
+                for (int next : graph[y]) {
+                    if (next == 0)
+                        continue; // cat cannot go to hole
+                    int r = find(graph, f, t + 1, x, next);
+                    if (r == 2) {
+                        return f[t][x][y] = 2;
+                    }
+                    if (r == 0) {
+                        mouse_win = false;
+                    }
                 }
-                if (r == 0)
-                {
-                    mouse_win = false;
-                }
+                if (mouse_win)
+                    return f[t][x][y] = 1;
+                else
+                    return f[t][x][y] = 0;
             }
-            if (mouse_win) return f[t][x][y] = 1;
-            else return f[t][x][y] = 0;
         }
-    }
 
-    void fill(int[][][] f, int val)
-    {
-        for (int i = 0; i < f.length; ++i)
-        {
-            for (int j = 0; j < f[i].length; ++j)
-            {
-                Arrays.fill(f[i][j], val);
+        void fill(int[][][] f, int val) {
+            for (int i = 0; i < f.length; ++i) {
+                for (int j = 0; j < f[i].length; ++j) {
+                    Arrays.fill(f[i][j], val);
+                }
             }
         }
     }
-}
-     */
 }

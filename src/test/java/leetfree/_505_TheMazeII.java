@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-/**
+/*
  * There is a ball in a maze with empty spaces and walls. The ball can go through empty spaces by rolling up, down, left
  * or right, but it won't stop rolling until hitting a wall. When the ball stops, it could choose the next direction.
  * <p>
@@ -74,6 +74,9 @@ public class _505_TheMazeII {
         Assert.assertEquals(-1, canWin(board, 0, 4, 3, 2));
     }
 
+    /**
+     * It actually uses the Dijkstra to travel the maze
+     */
     public int canWin(int[][] board, int startX, int startY, int endX, int endY) {
         Point start = new Point(startX, startY);
         Point end = new Point(endX, endY);

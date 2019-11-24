@@ -38,7 +38,7 @@ Note:
 public class __1011_CapacityToShipPackagesWithinDDays {
 
     /**
-     * Can be reolved as dynamicProgramming._410_SplitArrayLargestSum or since we can evaluate the
+     * Can be resolved as dynamicProgramming._410_SplitArrayLargestSum or since we can evaluate the
      * min and max load we can binary search for the optimal solution as the below solution.
      * The lower bound is the max weight in the list while the max bound is the total sum of the weights or without
      * reading the list we can 50000*500.

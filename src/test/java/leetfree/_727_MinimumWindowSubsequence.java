@@ -3,6 +3,10 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /*
 Given strings S and T, find the minimum (contiguous) substring W of S, so that T is a subsequence of W.
 If there is no such window in S that covers all characters in T, return the empty string "". If there are multiple
@@ -32,7 +36,7 @@ public class _727_MinimumWindowSubsequence {
 
     @Test
     public void test1() {
-        Assert.assertEquals("bcde", minimumWindowSubsequence("abcdebdde","bde"));
+        Assert.assertEquals("bcde", minimumWindowSubsequence("abcdebdde", "bde"));
         /**
          * in this case the table should be like
          *
@@ -53,6 +57,69 @@ public class _727_MinimumWindowSubsequence {
     }
 
     private String minimumWindowSubsequence(String abcdebdde, String bde) {
+        /*
+        The next matrix can be constructed with:
+        int[][] matrix = new int[T.length()][S.length()];
+        init last matrix[for each value][S.length()] = + inf
+        for (int i = S.length() -2; i >= 0 ; i--) {
+            for(int j = 0; j <= T.length() ; j++) {
+                if(S[i+1] == T[j])
+                    matrix[j][i] = i+1;
+                else
+                    matrix[j][i] = matrix[j][i+1];
+            }
+        }
+
+        At this point given all the possible starting point find the shortest substring is easy since we only need to
+        follow the precedending matrix for each possible start.
+        eg if matrix[0][3] the start the next step is matrix[1][ matrix[0][3] ]  and so on until the last row of the matrix
+         */
         return null;
+    }
+
+    /**
+     * Leet code provided solution pretty similar approach but with a larger matrix
+     */
+    class Solution {
+        public String minWindow(String S, String T) {
+            int N = S.length();
+            int[] last = new int[26];
+            int[][] nxt = new int[N][26];
+            Arrays.fill(last, -1);
+
+            for (int i = N - 1; i >= 0; --i) {
+                last[S.charAt(i) - 'a'] = i;
+                for (int k = 0; k < 26; ++k) {
+                    nxt[i][k] = last[k];
+                }
+            }
+
+            List<int[]> windows = new ArrayList();
+            for (int i = 0; i < N; ++i) {
+                if (S.charAt(i) == T.charAt(0))
+                    windows.add(new int[]{i, i});
+            }
+            for (int j = 1; j < T.length(); ++j) {
+                int letterIndex = T.charAt(j) - 'a';
+                for (int[] window : windows) {
+                    if (window[1] < N - 1 && nxt[window[1] + 1][letterIndex] >= 0) {
+                        window[1] = nxt[window[1] + 1][letterIndex];
+                    } else {
+                        window[0] = window[1] = -1;
+                        break;
+                    }
+                }
+            }
+
+            int[] ans = {-1, S.length()};
+            for (int[] window : windows) {
+                if (window[0] == -1) break;
+                if (window[1] - window[0] < ans[1] - ans[0]) {
+                    ans = window;
+                }
+
+            }
+            return ans[0] >= 0 ? S.substring(ans[0], ans[1] + 1) : "";
+        }
     }
 }

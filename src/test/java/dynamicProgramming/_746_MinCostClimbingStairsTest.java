@@ -22,4 +22,9 @@ public class _746_MinCostClimbingStairsTest {
     public void given2() {
         Assert.assertEquals(6, stairs.minCost(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}));
     }
+
+    @Test
+    public void given3() {
+        Assert.assertEquals(2, stairs.minCost(new int[]{0, 2, 2, 1}));
+    }
 }

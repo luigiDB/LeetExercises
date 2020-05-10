@@ -26,4 +26,17 @@ package dynamicProgramming;
  */
 public class _392_IsSubsequence {
     //TODO: it's enough to check that all the character is s are present in order by iterating over t
+
+    public boolean isSubsequence(String sub, String string) {
+        int subIndex = 0;
+
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) == sub.charAt(subIndex)) {
+                subIndex++;
+                if (subIndex == sub.length())
+                    return true;
+            }
+        }
+        return false;
+    }
 }

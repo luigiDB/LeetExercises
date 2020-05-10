@@ -1,6 +1,6 @@
 package dynamicProgramming;
 
-/**
+/*
  * On a staircase, the i-th step has some non-negative cost cost[i] assigned (0 indexed).
  * Once you pay the cost, you can either climb one or two steps. You need to find minimum cost to reach the top of the
  * floor, and you can either start from the step with index 0, or the step with index 1.
@@ -10,14 +10,13 @@ package dynamicProgramming;
  */
 public class _746_MinCostClimbingStairs {
 
-    public int minCost(int[] stairs) {
-        int cost = 0;
-
-        for (int i = stairs.length; i > 1; ) {
-            i = (stairs[i - 2] <= stairs[i - 1]) ? i - 2 : i - 1;
-            cost += stairs[i];
+    public int minCost(int[] cost) {
+        int[] dp = new int[cost.length];
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        for (int i = 2; i<cost.length; i++) {
+            dp[i] = cost[i] + Math.min(dp[i-2], dp[i-1]);
         }
-
-        return cost;
+        return Math.min(dp[dp.length-1], dp[dp.length-2]);
     }
 }

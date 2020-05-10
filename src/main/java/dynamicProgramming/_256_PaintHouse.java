@@ -28,10 +28,10 @@ public class _256_PaintHouse {
         int minRed = 0;
         int minBlue = 0;
         int minGreen = 0;
-        for (int i = 0; i < costs.length; i++) {
-            int red = Math.min(minBlue, minGreen) + costs[i][0];
-            int blue = Math.min(minRed, minGreen) + costs[i][1];
-            int green = Math.min(minRed, minBlue) + costs[i][2];
+        for (int[] cost : costs) {
+            int red = Math.min(minBlue, minGreen) + cost[0];
+            int blue = Math.min(minRed, minGreen) + cost[1];
+            int green = Math.min(minRed, minBlue) + cost[2];
             minRed = red;
             minBlue = blue;
             minGreen = green;

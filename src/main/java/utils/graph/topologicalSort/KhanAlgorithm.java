@@ -30,22 +30,26 @@ public class KhanAlgorithm {
 
     public List<Integer> sort() {
         List<Integer> visitOrder = new LinkedList<>();
-        boolean visited[] = new boolean[nodes.length];
-        int fanIn[] = new int[nodes.length];
+        boolean[] visited = new boolean[nodes.length];
+        int[] fanIn = evaluateStartingFanIn();
 
-        for (int i = 0; i < nodes.length; i++) {
-            List<IEdge<Integer>> nexts = graph.get(nodes[i]);
+        while (checkNonVisitedNodes(visited))
+            khanTopologicalSort(visited, fanIn, visitOrder);
+
+        return visitOrder;
+    }
+
+    private int[] evaluateStartingFanIn() {
+        int[] fanIn = new int[nodes.length];
+        for (Integer node : nodes) {
+            List<IEdge<Integer>> nexts = graph.get(node);
             if (nexts != null) {
                 for (IEdge<Integer> next : nexts) {
                     fanIn[next.getNodeF()]++;
                 }
             }
         }
-
-        while (checkNonVisitedNodes(visited))
-            khanTopologicalSort(visited, fanIn, visitOrder);
-
-        return visitOrder;
+        return fanIn;
     }
 
     private boolean checkNonVisitedNodes(boolean[] visited) {

@@ -25,9 +25,9 @@ public class TopologicalSort<T> {
         Set<T> visited = new HashSet<>();
 
         while (visited.size() != nodes.length) {
-            for (int i = 0; i < nodes.length; i++) {
-                if (!visited.contains(nodes[i])) {
-                    topologicalSort(nodes[i], result, visited);
+            for (T node : nodes) {
+                if (!visited.contains(node)) {
+                    topologicalSort(node, result, visited);
                 }
             }
         }

@@ -1,9 +1,12 @@
 package dynamicProgramming;
 
-/**
- * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+/*
+ * You are a professional robber planning to rob houses along a street. Each house has a certain amount of money
+ * stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system
+ * connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
  *
- * Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+ * Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount
+ * of money you can rob tonight without alerting the police.
  *
  * Example 1:
  *
@@ -20,9 +23,19 @@ package dynamicProgramming;
  */
 public class _198_HouseRobber {
     /**
-     * Similar iterative approach used in porblem 70
+     * Similar iterative approach used in problem 70
      * Each result can be computed from previous steps in this case the gain at N = MAX(gainAt(N-2)+gain[N], gainAT(N-1))
      * because at each step I can only choose to rob the present and second last or only the previous one.
      */
 
+    public static int bestBounty(int[] houses) {
+        return recursiveSearch(houses, houses.length - 1);
+    }
+
+    private static int recursiveSearch(int[] houses, int index) {
+        if (index < 0)
+            return 0;
+        return Math.max(recursiveSearch(houses, index - 2) + houses[index],
+                recursiveSearch(houses, index - 1));
+    }
 }

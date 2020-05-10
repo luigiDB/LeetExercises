@@ -44,7 +44,7 @@ public class BellmanFord {
         for (int i = 0; i < vertexes.length; i++) {
             for (IWeightedEdge<Integer> edge : edges) {
                 /**IMPORTANT PART
-                 * We update update the distance only if the current distance is not INF
+                 * We update the distance only if the current distance is not INF
                  */
                 if (distances[edge.getNodeS()] != Integer.MAX_VALUE
                         && distances[edge.getNodeF()] > distances[edge.getNodeS()] + edge.getCost()) {

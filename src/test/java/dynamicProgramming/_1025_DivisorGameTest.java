@@ -32,6 +32,6 @@ public class _1025_DivisorGameTest {
 
     @Test
     public void test5() {
-        Assert.assertTrue(divisorGame.firstPlayerWin(5));
+        Assert.assertFalse(divisorGame.firstPlayerWin(5));
     }
 }

@@ -1,4 +1,12 @@
 package leetfree;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 /*
 Sometimes people repeat letters to represent extra feeling, such as "hello" -> "heeellooo", "hi" -> "hiiii".  In these
 strings like "heeellooo", we have groups of adjacent letters that are all the same:  "h", "eee", "ll", "ooo".
@@ -29,6 +37,21 @@ Notes:
 S and all words in words consist only of lowercase letters
  */
 public class __809_ExpressiveWords {
+    @Test
+    public void testGiven() {
+        Assert.assertEquals(1, expressiveWords("heeellooo", new String[]{"hello", "hi", "helo"}));
+    }
+
+    @Test
+    public void testShorterInputs() {
+        Assert.assertEquals(0, expressiveWords("abcd", new String[]{"abc"}));
+    }
+
+    @Test
+    public void testThatWhenASequenceIsShorterInTheGivenWordZeroIsReturned() {
+        Assert.assertEquals(0, expressiveWords("aaa", new String[]{"aaaa"}));
+    }
+
     /**
      * We can iterate at the same time over S and counting for each char encountered the sequential occurrences:
      * Once we know for each char the occurrences on S (N) and on the word (M) we can determine the results as:
@@ -37,7 +60,65 @@ public class __809_ExpressiveWords {
      * if (N >M %% N>3 ) ok
      * else not possible
      */
+
+
     public int expressiveWords(String S, String[] words) {
-        return 0;
+        List<Deconstruct> mainWord = divide(S);
+
+        return Arrays.stream(words)
+                .map( s -> divide(s))
+                .map( d -> {
+                    if(mainWord.size() != d.size())
+                        return 0;
+                    for (int i = 0; i < mainWord.size(); i++) {
+                        if(mainWord.get(i).getChar() != d.get(i).getChar() )
+                            return 0;
+                        if(mainWord.get(i).getOccurrences() < 3 && d.get(i).getOccurrences() != mainWord.get(i).getOccurrences() )
+                            return 0;
+                        if(mainWord.get(i).getOccurrences() >= 3 && d.get(i).getOccurrences() > mainWord.get(i).getOccurrences() )
+                            return 0;
+                    }
+                    return 1;
+                })
+                .reduce(Integer::sum)
+                .get();
+    }
+
+    private List<Deconstruct> divide(String s) {
+        List<Deconstruct> tempList = new LinkedList<>();
+
+        char current = s.charAt(0);
+        int counter = 0;
+        for (char c: s.toCharArray()) {
+            if(c == current)
+                counter++;
+            else {
+                tempList.add(new Deconstruct(current, counter));
+                current = c;
+                counter = 1;
+            }
+        }
+        tempList.add(new Deconstruct(current, counter));
+
+        return tempList;
+    }
+
+    private class Deconstruct {
+
+        private final char c;
+        private final int occurrences;
+
+        public Deconstruct(char c, int occurrences) {
+            this.c = c;
+            this.occurrences = occurrences;
+        }
+
+        public char getChar() {
+            return c;
+        }
+
+        public int getOccurrences() {
+            return occurrences;
+        }
     }
 }

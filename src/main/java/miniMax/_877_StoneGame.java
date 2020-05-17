@@ -1,7 +1,4 @@
-package minMax;
-
-import java.util.HashMap;
-import java.util.Map;
+package miniMax;
 
 /*
 Alex and Lee play a game with piles of stones.  There are an even number of piles arranged in a row, and each pile has

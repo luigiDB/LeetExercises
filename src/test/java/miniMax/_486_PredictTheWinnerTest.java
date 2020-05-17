@@ -1,4 +1,4 @@
-package minMax;
+package miniMax;
 
 import org.junit.Assert;
 import org.junit.Before;

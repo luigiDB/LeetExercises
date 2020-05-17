@@ -1,4 +1,4 @@
-package minMax;
+package miniMax;
 
 /*
 Given an array of scores that are non-negative integers. Player 1 picks one of the numbers from either end of the array

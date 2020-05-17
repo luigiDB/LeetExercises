@@ -1,4 +1,4 @@
-package minMax;
+package miniMax;
 
 /*
 We are playing the Guess Game. The game is as follows:

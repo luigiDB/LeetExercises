@@ -1,5 +1,6 @@
-package leetfree;
+package miniMax;
 
+import leetfree._293_FlipGame;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

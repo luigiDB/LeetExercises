@@ -1,4 +1,4 @@
-package minMax;
+package miniMax;
 
 import java.util.Arrays;
 
@@ -27,7 +27,7 @@ Note:
 It is guaranteed that graph[1] is non-empty.
 It is guaranteed that graph[2] contains a non-zero element.
  */
-public class __913_CatAndMouse {
+public class _913_CatAndMouse {
     /*
     How to understand the solution
     https://pdfs.semanticscholar.org/2ee6/17f10fa115a94ff7b59a6120ff33dd1dde87.pdf

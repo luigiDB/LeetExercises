@@ -1,4 +1,4 @@
-package leetfree;
+package miniMax;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,7 +27,7 @@ master.guess("abcczz") returns 4, because "abcczz" has 4 matches.
 We made 5 calls to master.guess and one of them was the secret, so we pass the test case.
 Note:  Any solutions that attempt to circumvent the judge will result in disqualification.
  */
-public class __843_GuessTheWord {
+public class _843_GuessTheWord {
 
     interface Master {
         int guess(String word);

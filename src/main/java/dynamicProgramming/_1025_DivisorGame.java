@@ -13,6 +13,11 @@ import java.util.*;
  * <p>
  * 1 <= N <= 1000
  */
+
+/**
+ * Another solution can be to evaluate from zero onwards and build the tree in order.
+ * Observing the solutions we can also conclude that Alice always wins on even N.
+ */
 public class _1025_DivisorGame {
 
     Boolean[][] winnerMatrix;

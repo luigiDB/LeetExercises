@@ -3,6 +3,7 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /*
@@ -16,47 +17,38 @@ Note:
  */
 public class __1007_MinimumDominoRotationsForEqualRow {
 
-    /*
-    GREEDY SOLUTION
-    We can immediately determine if we need to flip the next domino if there is a value equals to one on the
-    current domino
 
-    public int check(int x, int[] A, int[] B, int n) {
-    // how many rotations should be done
-    // to have all elements in A equal to x
-    // and to have all elements in B equal to x
-    int rotations_a = 0, rotations_b = 0;
-    for (int i = 0; i < n; i++) {
-      // rotations coudn't be done
-      if (A[i] != x && B[i] != x) return -1;
-      // A[i] != x and B[i] == x
-      else if (A[i] != x) rotations_a++;
-      // A[i] == x and B[i] != x
-      else if (B[i] != x) rotations_b++;
-    }
-    // min number of rotations to have all
-    // elements equal to x in A or B
-    return Math.min(rotations_a, rotations_b);
-  }
-
-  public int minDominoRotations(int[] A, int[] B) {
-    int n = A.length;
-    int rotations = check(A[0], B, A, n);
-    // If one could make all elements in A or B equal to A[0]
-    if (rotations != -1 || A[0] == B[0]) return rotations;
-    // If one could make all elements in A or B equal to B[0]
-    else return check(B[0], B, A, n);
-  }
-     */
     @Test
     public void given1() {
         Assert.assertEquals(2, minDominoRotations(new int[]{2,1,2,4,2,2}, new int[]{5,2,6,2,3,2}));
     }
+
     @Test
     public void given2() {
         Assert.assertEquals(-1, minDominoRotations(new int[]{2,1,2,4,2,2}, new int[]{5,4,6,2,3,2}));
     }
 
+    @Test
+    public void stressTestFirstSolution() {
+        int[] A = new int[1000000];
+        Arrays.fill(A, 2);
+        int[] B = new int[1000000];
+        Arrays.fill(B, 5);
+        A[A.length-1] = 7;
+        Assert.assertEquals(0, minDominoRotations(A, B));
+    }
+
+    @Test
+    public void stressTestSecondSolution() {
+        int[] A = new int[1000000];
+        Arrays.fill(A, 2);
+        int[] B = new int[1000000];
+        Arrays.fill(B, 5);
+        A[A.length-1] = 7;
+        Assert.assertEquals(0, minDominoRotationsSolution2(A, B));
+    }
+
+    // This solution completes in 67ms and 41.8MB
     public int minDominoRotations(int[] A, int[] B) {
         HashMap<Integer, Integer> occurrenceMap = new HashMap<>();
         HashMap<Integer, Integer> doubleDominoes = new HashMap<>();
@@ -98,4 +90,34 @@ public class __1007_MinimumDominoRotationsForEqualRow {
         });
         return map.get(key);
     }
+
+    /*
+    GREEDY SOLUTION
+    We can immediately determine if we need to flip the next domino if there is a value equals to one on the
+    current domino
+    This solution completes in 7ms and 114.8 MB
+    */
+    public int minDominoRotationsSolution2(int[] A, int[] B) {
+        int rotations = tryFit(A[0], A, B);
+        if (rotations != -1 || A[0] == B[0])
+            return rotations;
+        return tryFit(B[0], A, B);
+
+    }
+
+    private int tryFit(int recurrentNumber, int[] A, int[] B) {
+        int flipCount = 0;
+        int doublesDomino = 0;
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] != recurrentNumber && B[i] != recurrentNumber)
+                return -1;
+            if (A[i] == recurrentNumber && B[i] == recurrentNumber)
+                doublesDomino++;
+            else if (B[i] == recurrentNumber) {
+                flipCount++;
+            }
+        }
+        return Math.min(flipCount, A.length - doublesDomino - flipCount);
+    }
+
 }

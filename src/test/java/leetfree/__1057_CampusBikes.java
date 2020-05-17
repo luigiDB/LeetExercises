@@ -55,6 +55,7 @@ public class __1057_CampusBikes {
             }
         }
         int[] res = new int[workers.length];
+        //can be done on arrays rather then Sets to be more efficient
         Set<Integer> usedBikes = new HashSet<>();
         Set<Integer> usedWorker = new HashSet<>();
         while (usedBikes.size() != bikes.length && usedWorker.size() != workers.length) {

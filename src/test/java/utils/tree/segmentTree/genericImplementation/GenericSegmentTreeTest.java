@@ -16,6 +16,7 @@ public class GenericSegmentTreeTest extends TestCase {
         @Override
         public void init(SegmentNode<Integer> l, SegmentNode<Integer> r) {
             setValue(l.get() + r.get());
+//            setValue(l.get() + r.get());
         }
 
         @Override
@@ -46,4 +47,13 @@ public class GenericSegmentTreeTest extends TestCase {
         Assert.assertEquals(2, tree.query(1, 2).get());
     }
 
+    @Test
+    public void testUpdate() {
+        tree.update(1, 10);
+        Assert.assertEquals(16, tree.query(0, 3).get());
+        Assert.assertEquals(10, tree.query(1, 1).get());
+        tree.update(2, 20);
+        Assert.assertEquals(20, tree.query(2, 2).get());
+        Assert.assertEquals(37, tree.query(0, freq.length - 1).get());
+    }
 }

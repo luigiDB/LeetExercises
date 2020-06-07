@@ -8,7 +8,7 @@ import java.util.Stack;
  * Given a string which contains only lowercase letters, remove duplicate letters so that every letter appears once and
  * only once. You must make sure your result is the smallest in lexicographical order among all possible results.
  */
-public class _316_RemoveDuplicateLetters {
+public class _316_1081_RemoveDuplicateLetters {
 
     public static String removeDuplicates(String s) {
         //The order of the solution must be a substring of the original string

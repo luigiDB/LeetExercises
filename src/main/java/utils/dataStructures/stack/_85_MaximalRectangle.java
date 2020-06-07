@@ -27,10 +27,10 @@ public class _85_MaximalRectangle {
         Stack<Integer> stack = new Stack<>();
         stack.push(-1);
 
-        //We are creating a stack of decreasing heights
+        //We are creating a stack of monotonic increasing heights
         for (int i = 0; i < support.length; i++) {
             while (stack.peek() != -1 && support[stack.peek()] >= support[i]) {
-                max = Math.max(max, support[stack.pop()] * (i - stack.peek() - 1));
+                max = Math.max(max, support[stack.pop()] * ((i - 1) - stack.peek()));
             }
             stack.push(i);
         }

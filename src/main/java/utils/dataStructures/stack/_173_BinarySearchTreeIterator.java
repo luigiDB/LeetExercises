@@ -1,8 +1,5 @@
 package utils.dataStructures.stack;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.Stack;
 
 /**
@@ -12,40 +9,29 @@ import java.util.Stack;
  */
 public class _173_BinarySearchTreeIterator {
 
-    private Node root;
+    private Node node;
     private final Stack<Node> stack;
 
     public _173_BinarySearchTreeIterator(Node root) {
-        this.root = root;
+        this.node = root;
         stack = new Stack<>();
-        stack.push(root);
-
-        moveLeft();
-    }
-
-    private void moveLeft() {
-        while (stack.peek().left != null) {
-            stack.push(stack.peek().left);
-        }
     }
 
     public int next() {
-        Node toBeReturned = stack.pop();
-
-        if (toBeReturned.right != null) {
-            // we are not in a leaf
-            stack.push(toBeReturned.right);
-            moveLeft();
-        } else {
-            // leaf
-            // nothing to do
+        if (node != null || !stack.isEmpty()) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            Node tmp = stack.pop();
+            node = tmp.right;
+            return tmp.value;
         }
-
-        return toBeReturned.value;
+        return -1;
     }
 
     public boolean hasNext() {
-        return !stack.isEmpty();
+        return node != null || !stack.isEmpty();
     }
 
 

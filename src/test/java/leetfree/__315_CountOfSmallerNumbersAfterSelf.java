@@ -28,6 +28,28 @@ public class __315_CountOfSmallerNumbersAfterSelf {
         Assert.assertThat(countSmaller(new int[]{1, 5, 2, 6, 1, 1}), contains(0, 3, 2, 2, 0, 0));
     }
 
+    @Test
+    public void testTreeVersion() {
+        Assert.assertThat(countSmallerWithTree(new int[]{1, 5, 2, 6, 1, 1}), contains(0, 3, 2, 2, 0, 0));
+    }
+
+    public List<Integer> countSmallerWithTree(int[] nums) {
+        if(nums.length == 0)
+            return new ArrayList<>();
+        Integer[] res = new Integer[nums.length];
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int accumulator = 0;
+            for (Integer j = map.floorKey(nums[i] - 1); j != null; j = map.floorKey(j - 1)) {
+                accumulator += map.get(j);
+            }
+            res[i] = accumulator;
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+        return Arrays.asList(res);
+    }
+
     public List<Integer> countSmaller(int[] nums) {
         if(nums.length == 0)
             return new ArrayList<>();

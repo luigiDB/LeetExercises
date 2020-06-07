@@ -1,7 +1,7 @@
 package utils.tree.trie;
 
 import utils.tree.TrieNode;
-import utils.tree.visit.Tree;
+import utils.tree.visit.VisitTree;
 
 public class Trie<T> {
 
@@ -11,7 +11,7 @@ public class Trie<T> {
         this.root = root;
     }
 
-    public Tree<T> convertToSonBrotherView () {
+    public VisitTree<T> convertToSonBrotherView () {
         return null;
     }
 }

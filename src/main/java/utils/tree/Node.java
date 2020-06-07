@@ -2,9 +2,9 @@ package utils.tree;
 
 public class Node<T> {
 
-    T info;
-    T left;
-    T right;
+    public T info;
+    public Node<T> left;
+    public Node<T> right;
 
     public Node(T info) {
         this.info = info;

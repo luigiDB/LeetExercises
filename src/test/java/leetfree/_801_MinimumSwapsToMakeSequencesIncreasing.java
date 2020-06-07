@@ -67,17 +67,16 @@ public class _801_MinimumSwapsToMakeSequencesIncreasing {
 
         if (A[i] <= A[i - 1] || B[i] <= B[i - 1]) {
             //must Swap
-            int[] copiedA = Arrays.copyOf(A, A.length);
-            int[] copiedB = Arrays.copyOf(B, B.length);
-            swap(copiedA, copiedB, i);
-            return 1 + countSwaps(copiedA, copiedB, i + 1);
+            swap(A, B, i);
+            int s = countSwaps(A, B, i + 1);
+            swap(A, B, i);
+            return 1 + s;
         } else {
             if (A[i] > B[i - 1] && B[i] > A[i - 1]) {
                 //swap is possible
-                int[] copiedA = Arrays.copyOf(A, A.length);
-                int[] copiedB = Arrays.copyOf(B, B.length);
-                swap(copiedA, copiedB, i);
-                int countSwaps = countSwaps(copiedA, copiedB, i + 1);
+                swap(A, B, i);
+                int countSwaps = countSwaps(A, B, i + 1);
+                swap(A, B, i);
                 return Math.min(countSwaps(A, B, i + 1), 1 + countSwaps);
             }
             return countSwaps(A, B, i + 1);

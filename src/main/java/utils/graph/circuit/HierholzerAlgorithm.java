@@ -39,10 +39,10 @@ public class HierholzerAlgorithm {
         IEdge<Integer> next;
 
         while (!forward.isEmpty()) {
-            IEdge<Integer> peek = forward.pop();
-            backtrack.push(peek);
+            IEdge<Integer> pop = forward.pop();
+            backtrack.push(pop);
 
-            straightforwardWalk(peek.getNodeS(),forward);
+            straightforwardWalk(pop.getNodeS(),forward);
         }
 
         List<Integer> path = new LinkedList<>();

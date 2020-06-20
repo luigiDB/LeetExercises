@@ -36,7 +36,7 @@ public class __679_24Game {
      */
 
     public boolean judgePoint24(int[] nums) {
-        ArrayList A = new ArrayList<Double>();
+        ArrayList<Double> A = new ArrayList<>();
         for (int v : nums) A.add((double) v);
         return solve(A);
     }

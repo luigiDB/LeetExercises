@@ -16,7 +16,7 @@ private int find(int[] parent, int node) {
 }
 
 
-2_ recursive with continuos rewriting of the parent array this way over time the depth of the parent tree became 1
+2_ recursive with continuous rewriting of the parent array this way over time the depth of the parent tree became 1
 public int find(int x) {
     if (parent[x] != x)
         parent[x] = find(parent[x]);

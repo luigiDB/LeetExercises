@@ -90,11 +90,7 @@ public class _314_BinaryTreeVerticalOrderTraversal {
         queue.add(new Position(root, 0));
         while (!queue.isEmpty()) {
             Position position = queue.remove();
-            List<Integer> list = map.get(position.column);
-            if (list == null) {
-                list = new ArrayList<>();
-                map.put(position.column, list);
-            }
+            List<Integer> list = map.computeIfAbsent(position.column, k -> new ArrayList<>());
             list.add(position.node.val);
             if (position.node.left != null) {
                 queue.add(new Position(position.node.left, position.column - 1));

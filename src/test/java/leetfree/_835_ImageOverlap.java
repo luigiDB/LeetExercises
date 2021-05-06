@@ -1,5 +1,8 @@
 package leetfree;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 /*
 Two images A and B are given, represented as binary, square matrices of the same size.  (A binary matrix has only 0s
 and 1s as values.)
@@ -22,16 +25,66 @@ Notes:
  */
 public class _835_ImageOverlap {
 
-    /*TODO: There are no really efficient way to resolve this; apart from knowing the Fourier Transform.
-    The best we can obtain is N^4 time complexity like
-    for any point in A
-        for any point in B
-            evaluate the delta and keep track of how many points participate in each delta
+    @Test
+    public void baseTest() {
+        int[][] A = new int[][]{
+                {1, 1, 0},
+                {0, 1, 0},
+                {0, 1, 0}
+        };
+        int[][] B = new int[][]{
+                {0, 0, 0},
+                {0, 1, 1},
+                {0, 0, 1}
+        };
+        Assert.assertEquals(3, largestOverlap(A, B));
+    }
 
-    return the delta with the highest number of occurrences.
-     */
+    @Test
+    public void baseInverted() {
+        int[][] A = new int[][]{
+                {1, 1, 0},
+                {0, 1, 0},
+                {0, 1, 0}
+        };
+        int[][] B = new int[][]{
+                {0, 0, 0},
+                {0, 1, 1},
+                {0, 0, 1}
+        };
+        Assert.assertEquals(3, largestOverlap(B, A));
+    }
+
+    /*TODO: There are no really efficient way to resolve this; apart from knowing the Fourier Transform.
+        The best we can obtain is N^4 time complexity like
+        for any point in A
+            for any point in B
+                evaluate the delta and keep track of how many points participate in each delta
+
+        return the delta with the highest number of occurrences.
+         */
     public int largestOverlap(int[][] A, int[][] B) {
-        return 0;
+        int len = A.length;
+        int maxOverlap = 0;
+        for (int iA = 0; iA < len; iA++) {
+            for (int jA = 0; jA < len; jA++) {
+                for (int iB = 0; iB < len; iB++) {
+                    for (int jB = 0; jB < len; jB++) {
+                        if (A[iA][jA] == 1 && B[iB][jB] == 1) {
+                            int overlap = 0;
+                            for (int iK = 0; iK < len - Math.max(iA, iB); iK++) {
+                                for (int jK = 0; jK < len - Math.max(jA, jB); jK++) {
+                                    if (A[iA + iK][jA + jK] == 1 && B[iB + iK][jB + jK] == 1)
+                                        overlap++;
+                                }
+                            }
+                            maxOverlap = Math.max(maxOverlap, overlap);
+                        }
+                    }
+                }
+            }
+        }
+        return maxOverlap;
     }
 
 }

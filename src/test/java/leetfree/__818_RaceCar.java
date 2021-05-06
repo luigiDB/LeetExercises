@@ -1,4 +1,10 @@
 package leetfree;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+
 /*
 Your car starts at position 0 and speed +1 on an infinite number line.  (Your car can go into negative positions.)
 Your car drives automatically according to a sequence of instructions A (accelerate) and R (reverse).
@@ -29,9 +35,9 @@ public class __818_RaceCar {
      * Realistic approach:
      * 1_   decide a direction so start with a R in case target is negative
      * 2_   add A until P(i) < target < P(i+1)
-     *      at that point there are two possible routes
-     *      a_  from P(i) add RR and restart until point 2
-     *      b_  from P(i+1) add RR and restart from step 2 but with opposite direction (aka until P(i+1) < target < P(i))
+     * at that point there are two possible routes
+     * a_  from P(i) add RR and restart until point 2
+     * b_  from P(i+1) add RR and restart from step 2 but with opposite direction (aka until P(i+1) < target < P(i))
      * eg to demonstrate the approach with target 8
      */
      /*     0   A   A   A   A
@@ -45,4 +51,49 @@ public class __818_RaceCar {
                             -1  1   2
             So we have AAAARAAA if we came back from 15 or AAARRA if we reset the progression at 7
      */
+
+    /**
+     * Notice the pruning conditions. Here is the reasoning -
+     *
+     * For 'A', we will never want to go beyond 2 x target
+     * For 'R', we won't go beyond 2 x target either
+     * According to the constraints, target >= 1. Hence, we never consider negative numbers for the queue.
+     * Time complexity not sure, but maybe O(target * log(target)). Would appreciate if someone could confirm. Thanks.
+     */
+    class Solution {
+        public int racecar(int target) {
+            if (target == 0 || target == 1) return target;
+            Queue<int[]> queue = new LinkedList<>();
+            queue.add(new int[]{0, 1, 0});
+            Set<String> seen = new HashSet<>();
+            seen.add(getRep(0, 1));
+            while (!queue.isEmpty()) {
+                int[] curr = queue.remove();
+                if (curr[0] == target) return curr[2];
+                // A
+                int pos = curr[0];
+                int speed = curr[1];
+                if (pos + speed > 0 && pos + speed < 2 * target) {
+                    pos = curr[0] + curr[1];
+                    speed *= 2;
+                    if (seen.add(getRep(pos, speed))) {
+                        queue.add(new int[]{pos, speed, curr[2] + 1});
+                    }
+                }
+                // R
+                pos = curr[0];
+                if (pos > 0 && pos < 2 * target) {
+                    speed = curr[1] > 0 ? -1 : 1;
+                    if (seen.add(getRep(pos, speed))) {
+                        queue.add(new int[]{pos, speed, curr[2] + 1});
+                    }
+                }
+            }
+            return -1;
+        }
+
+        private String getRep(int pos, int speed) {
+            return new StringBuilder().append(pos).append("-").append(speed).toString();
+        }
+    }
 }

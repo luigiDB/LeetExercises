@@ -1,35 +1,28 @@
 package utils.graph.spanningTree;
 
-import utils.graph.egde.IWeightedEdge;
 import utils.graph.egde.undirected.WeightedUndirectedEdge;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Prim<T> {
-    private final List<WeightedUndirectedEdge<T>> edges;
     private final T[] vertexes;
     private final Map<T, Set<WeightedUndirectedEdge<T>>> graph;
 
     public Prim(List<WeightedUndirectedEdge<T>> edges, T[] vertexes) {
-        this.edges = edges;
         this.vertexes = vertexes;
         graph = new HashMap<>();
         for (T vertex : vertexes) {
             graph.put(vertex, new HashSet<>());
         }
-        edges.stream().forEach(e -> {
+        edges.forEach(e -> {
             graph.compute(e.getNodeS(), (k, v) -> {
-                Set<WeightedUndirectedEdge<T>> tmp = new HashSet<>();
-                tmp.addAll(v);
+                Set<WeightedUndirectedEdge<T>> tmp = new HashSet<>(v);
                 tmp.add(e);
                 return tmp;
             });
 
             graph.compute(e.getNodeF(), (k, v) -> {
-                Set<WeightedUndirectedEdge<T>> tmp = new HashSet<>();
-                tmp.addAll(v);
+                Set<WeightedUndirectedEdge<T>> tmp = new HashSet<>(v);
                 tmp.add(new WeightedUndirectedEdge<>(e.getNodeF(), e.getNodeS(), e.getCost()));
                 return tmp;
             });

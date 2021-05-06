@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class VisitTree<T> {
 
-    private Node<T> root;
+    private final Node<T> root;
 
     public VisitTree(Node<T> root) {
         this.root = root;
@@ -22,7 +22,7 @@ public class VisitTree<T> {
 
     public List<T> inOrder() {
         List<T> res = new ArrayList<>();
-        Stack<Node> stack = new Stack<>();
+        Stack<Node<T>> stack = new Stack<>();
         Node<T> curr = root;
         while (curr != null || !stack.isEmpty()) {
             while (curr != null) {

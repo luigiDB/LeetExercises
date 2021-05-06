@@ -3,8 +3,8 @@ package utils.tree.segmentTree.genericImplementation;
 abstract class AbstractNode<T> implements SegmentNode<T> {
 
     private T value;
-    private SegmentNode left;
-    private SegmentNode right;
+    private SegmentNode<T> left;
+    private SegmentNode<T> right;
 
     @Override
     public void init(T value) {
@@ -12,22 +12,22 @@ abstract class AbstractNode<T> implements SegmentNode<T> {
     }
 
     @Override
-    public void addLeft(SegmentNode node) {
+    public void addLeft(SegmentNode<T> node) {
         left = node;
     }
 
     @Override
-    public void addRight(SegmentNode node) {
+    public void addRight(SegmentNode<T> node) {
         right = node;
     }
 
     @Override
-    public SegmentNode getLeft() {
+    public SegmentNode<T> getLeft() {
         return left;
     }
 
     @Override
-    public SegmentNode getRight() {
+    public SegmentNode<T> getRight() {
         return right;
     }
 

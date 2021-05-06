@@ -51,4 +51,18 @@ public class VisitTreeTest extends TestCase {
         Assert.assertEquals(Arrays.asList(6, 3, 1), visitor.postOrder());
         Assert.assertEquals(Arrays.asList(1, 3, 6), visitor.preOrder());
     }
+
+    public void testWithCharacters() {
+        Node<Character> root = new Node<>('a');
+        root.left = new Node<>('b');
+        root.left.left = new Node<>('d');
+        root.left.right = new Node<>('e');
+        root.right = new Node<>('c');
+        root.right.left = new Node<>('f');
+        root.right.right = new Node<>('g');
+        VisitTree<Character> visitor = new VisitTree<>(root);
+        Assert.assertEquals(Arrays.asList('d', 'b', 'e', 'a', 'f', 'c', 'g'), visitor.inOrder());
+        Assert.assertEquals(Arrays.asList('a', 'b', 'd', 'e', 'c', 'f', 'g'), visitor.preOrder());
+        Assert.assertEquals(Arrays.asList('d', 'e', 'b', 'f', 'g', 'c', 'a'), visitor.postOrder());
+    }
 }

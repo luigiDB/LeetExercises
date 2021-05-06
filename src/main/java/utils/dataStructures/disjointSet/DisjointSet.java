@@ -22,7 +22,7 @@ public class DisjointSet {
     }
 
     public boolean isCycle() {
-        int parent[] = new int[v];
+        int[] parent = new int[v];
         for (int i = 0; i < v; i++) {
             parent[i] = -1;
         }

@@ -16,16 +16,15 @@ public class BellmanFord {
      * well for distributed systems. But time complexity of Bellman-Ford is O(VE), which is more than Dijkstra.
      */
 
-    private List<IWeightedEdge<Integer>> edges;
-    private Integer[] vertexes;
-    private final Map<Integer, List<IWeightedEdge<Integer>>> graph;
-    private Integer[] distances;
-    private Integer[] previouses;
+    private final List<IWeightedEdge<Integer>> edges;
+    private final Integer[] vertexes;
+    private final Integer[] distances;
+    private final Integer[] previouses;
 
     public BellmanFord(List<IWeightedEdge<Integer>> edges, Integer[] vertexes) {
         this.edges = edges;
         this.vertexes = vertexes;
-        graph = edges.stream().collect(
+        Map<Integer, List<IWeightedEdge<Integer>>> graph = edges.stream().collect(
                 Collectors.groupingBy(
                         IWeightedEdge::getNodeS,
                         Collectors.mapping(Function.identity(), Collectors.toList())

@@ -7,12 +7,10 @@ import java.util.stream.Collectors;
 
 public class TopologicalSort<T> {
 
-    private final List<IEdge<T>> edges;
     private final T[] nodes;
     private final Map<T, List<IEdge<T>>> graph;
 
     public TopologicalSort(List<IEdge<T>> edges, T[] nodes) {
-        this.edges = edges;
         this.nodes = nodes;
         graph = edges.stream().collect(Collectors.groupingBy(
                 IEdge::getNodeS,

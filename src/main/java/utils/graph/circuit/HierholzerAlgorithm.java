@@ -36,7 +36,6 @@ public class HierholzerAlgorithm {
         Stack<IEdge<Integer>> backtrack = new Stack<>();
 
         straightforwardWalk(start, forward);
-        IEdge<Integer> next;
 
         while (!forward.isEmpty()) {
             IEdge<Integer> pop = forward.pop();

@@ -11,14 +11,12 @@ public class Kruskal<T> {
 
     private final List<WeightedUndirectedEdge<T>> edges;
     private final T[] vertexes;
-    private final Map<T, List<WeightedUndirectedEdge<T>>> graph;
     private int[] sets;
-    private Queue<WeightedUndirectedEdge<T>> heap;
 
     public Kruskal(List<WeightedUndirectedEdge<T>> edges, T[] vertexes) {
         this.edges = edges;
         this.vertexes = vertexes;
-        graph = edges.stream().collect(
+        Map<T, List<WeightedUndirectedEdge<T>>> graph = edges.stream().collect(
                 Collectors.groupingBy(
                         IWeightedEdge::getNodeS,
                         Collectors.mapping(Function.identity(), Collectors.toList())
@@ -32,15 +30,14 @@ public class Kruskal<T> {
         for (int i = 0; i < sets.length; i++) {
             sets[i] = i;
         }
-        heap = new PriorityQueue<>(Comparator.comparingInt(WeightedUndirectedEdge::getCost));
+        Queue<WeightedUndirectedEdge<T>> heap = new PriorityQueue<>(Comparator.comparingInt(WeightedUndirectedEdge::getCost));
         heap.addAll(edges);
 
         while (!heap.isEmpty()) {
             WeightedUndirectedEdge<T> edge = heap.poll();
             int s = treeOf(edge.getNodeS());
             int f = treeOf(edge.getNodeF());
-            boolean b = s != f;
-            if (b) {
+            if (s != f) {
                 merge(edge.getNodeS(), edge.getNodeF());
                 returnList.add(edge);
             }

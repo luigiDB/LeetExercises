@@ -21,11 +21,11 @@ public class BacktrackingCircuitSearch {
     public List<LinkedList<Integer>> discoverCircuit() {
         List<LinkedList<Integer>> possiblePaths = new LinkedList<>();
         LinkedList<Integer> path = new LinkedList<>();
-        Set<IEdge<Integer>> visisted = new HashSet<>();
+        Set<IEdge<Integer>> visited = new HashSet<>();
 
         path.add(nodes[0]);
 
-        recursiveExploration(path, possiblePaths, visisted);
+        recursiveExploration(path, possiblePaths, visited);
 
         return possiblePaths;
     }
@@ -47,13 +47,13 @@ public class BacktrackingCircuitSearch {
         }
 
         if (path.getFirst().equals(path.getLast())) {
-            if (exausted(visited)) {
+            if (exhausted(visited)) {
                 possiblePaths.add(new LinkedList<>(path));
             }
         }
     }
 
-    private boolean exausted(Set<IEdge<Integer>> visited) {
+    private boolean exhausted(Set<IEdge<Integer>> visited) {
         Set<IEdge<Integer>> tmp = new HashSet<>(edgeList);
         tmp.removeAll(visited);
         return tmp.isEmpty();

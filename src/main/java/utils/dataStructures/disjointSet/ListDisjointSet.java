@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class ListDisjointSet<T> {
 
-    private Set<PointerSet<T>> sets;
+    private final Set<PointerSet<T>> sets;
 
     public ListDisjointSet() {
         this.sets = new HashSet<>();

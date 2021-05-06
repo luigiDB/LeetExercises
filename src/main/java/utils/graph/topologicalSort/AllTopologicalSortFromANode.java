@@ -25,9 +25,9 @@ public class AllTopologicalSortFromANode {
 
     public List<String> sort(int startNode) {
         List<String> possibleSortings = new LinkedList<>();
-        boolean visited[] = new boolean[nodes.length];
+        boolean[] visited = new boolean[nodes.length];
         List<Integer> stack = new LinkedList<>();
-        int fanIn[] = new int[nodes.length];
+        int[] fanIn = new int[nodes.length];
 
         for (int i = 0; i < nodes.length ; i++) {
             List<IEdge<Integer>> nexts = graph.get(nodes[i]);

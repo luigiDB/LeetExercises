@@ -37,7 +37,7 @@ public class Dijkstra<T> {
     }
 
     public void dijkstraDistance(T startNode) {
-        Queue<IWeightedEdge> priorityQueue = new PriorityQueue<>(Comparator.comparing(IWeightedEdge::getCost));
+        Queue<IWeightedEdge<T>> priorityQueue = new PriorityQueue<>(Comparator.comparing(IWeightedEdge::getCost));
 
         distances = new Integer[vertexes.length];
         Arrays.fill(distances, Integer.MAX_VALUE);
@@ -45,7 +45,7 @@ public class Dijkstra<T> {
         previouses = new Integer[vertexes.length];
         Arrays.fill(previouses, 0);
 
-        priorityQueue.add(new WeightedDirectedEdge(startNode, startNode, 0));
+        priorityQueue.add(new WeightedDirectedEdge<T>(startNode, startNode, 0));
         distances[Arrays.asList(vertexes).indexOf(startNode)] = 0;
 
         while (!priorityQueue.isEmpty()) {

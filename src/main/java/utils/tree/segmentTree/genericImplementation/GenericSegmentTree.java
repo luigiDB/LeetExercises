@@ -4,12 +4,12 @@ import java.util.function.Supplier;
 
 public class GenericSegmentTree<T> {
 
-    private final Supplier<SegmentNode> factory;
+    private final Supplier<SegmentNode<T>> factory;
     private final int size;
-    private T[] input;
-    private final SegmentNode root;
+    private final T[] input;
+    private final SegmentNode<T> root;
 
-    public GenericSegmentTree(T[] input, Supplier<SegmentNode> nodeFactory) {
+    public GenericSegmentTree(T[] input, Supplier<SegmentNode<T>> nodeFactory) {
         this.input = input;
         root = nodeFactory.get();
         factory = nodeFactory;
@@ -17,7 +17,7 @@ public class GenericSegmentTree<T> {
         build(root, 0, size);
     }
 
-    private void build(SegmentNode node, int left, int right) {
+    private void build(SegmentNode<T> node, int left, int right) {
         if (left == right)
             node.init(input[left]);
         else {
@@ -30,14 +30,14 @@ public class GenericSegmentTree<T> {
         }
     }
 
-    public SegmentNode query(int left, int right) {
+    public SegmentNode<T> query(int left, int right) {
         return query(root, left, right, 0, size);
     }
 
-    private SegmentNode query(SegmentNode node, int leftLimit, int rightLimit, int l, int r) {
+    private SegmentNode<T> query(SegmentNode<T> node, int leftLimit, int rightLimit, int l, int r) {
         if (leftLimit <= l && r <= rightLimit)
             return node;
-        SegmentNode accumulator = factory.get();
+        SegmentNode<T> accumulator = factory.get();
         int mid = (l + r) / 2;
         if (leftLimit <= mid)
             accumulator.merge(query(node.getLeft(), leftLimit, rightLimit, l, mid));
@@ -52,7 +52,7 @@ public class GenericSegmentTree<T> {
         update(root, index, value, 0, size);
     }
 
-    private void update(SegmentNode node, int index, T value, int l, int r) {
+    private void update(SegmentNode<T> node, int index, T value, int l, int r) {
         if (l == r)
             node.init(value);
         else {

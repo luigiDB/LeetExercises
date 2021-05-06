@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Leet code 568
+ * leetfree._568_MaximumVacationDays
  */
 public class MaximizeLeisureDays {
 

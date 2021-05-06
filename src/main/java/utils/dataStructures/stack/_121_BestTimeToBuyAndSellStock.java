@@ -15,11 +15,11 @@ public class _121_BestTimeToBuyAndSellStock {
         int maxGain = 0;
         Stack<Integer> stack = new Stack<>();
 
-        for (int i = 0; i < prices.length; i++) {
-            while (!stack.isEmpty() && stack.peek() > prices[i]) {
+        for (int price : prices) {
+            while (!stack.isEmpty() && stack.peek() > price) {
                 stack.pop();
             }
-            stack.push(prices[i]);
+            stack.push(price);
             maxGain = Math.max(maxGain, stack.peek() - stack.get(0));
         }
 

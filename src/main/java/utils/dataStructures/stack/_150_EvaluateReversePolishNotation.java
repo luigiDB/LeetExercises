@@ -31,6 +31,7 @@ public class _150_EvaluateReversePolishNotation {
                         numbers.push(numbers.pop() * numbers.pop());
                         break;
                     case "-":
+                        // notice the minus
                         numbers.push(-numbers.pop() + numbers.pop());
                         break;
                     case "/":

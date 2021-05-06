@@ -37,7 +37,7 @@ public class __753_CrackingTheSafe {
      * 0 0   1 0 2 1   1     2 2 0
      */
 
-    class HierholzerAlgorithmSolution {
+    static class HierholzerAlgorithmSolution {
         Set<String> seen;
         StringBuilder ans;
 
@@ -56,7 +56,7 @@ public class __753_CrackingTheSafe {
             return new String(ans);
         }
 
-        public void dfs(String node, int k) {
+        private void dfs(String node, int k) {
             for (int x = 0; x < k; ++x) {
                 String nei = node + x;
                 if (!seen.contains(nei)) {

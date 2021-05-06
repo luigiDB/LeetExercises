@@ -42,18 +42,18 @@ public class GenericSegmentTreeTest extends TestCase {
 
     @Test
     public void testQueryOverSegmentsLegth() {
-        Assert.assertEquals(7, tree.query(0, 3).get());
-        Assert.assertEquals(6, tree.query(2, 4).get());
-        Assert.assertEquals(2, tree.query(1, 2).get());
+        Assert.assertEquals(Integer.valueOf(7), tree.query(0, 3).get());
+        Assert.assertEquals(Integer.valueOf(6), tree.query(2, 4).get());
+        Assert.assertEquals(Integer.valueOf(2), tree.query(1, 2).get());
     }
 
     @Test
     public void testUpdate() {
         tree.update(1, 10);
-        Assert.assertEquals(16, tree.query(0, 3).get());
-        Assert.assertEquals(10, tree.query(1, 1).get());
+        Assert.assertEquals(Integer.valueOf(16), tree.query(0, 3).get());
+        Assert.assertEquals(Integer.valueOf(10), tree.query(1, 1).get());
         tree.update(2, 20);
-        Assert.assertEquals(20, tree.query(2, 2).get());
-        Assert.assertEquals(37, tree.query(0, freq.length - 1).get());
+        Assert.assertEquals(Integer.valueOf(20), tree.query(2, 2).get());
+        Assert.assertEquals(Integer.valueOf(37), tree.query(0, freq.length - 1).get());
     }
 }

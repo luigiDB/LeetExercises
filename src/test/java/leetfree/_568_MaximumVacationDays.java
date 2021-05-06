@@ -32,6 +32,7 @@ package leetfree;
  * (Although you start at city 0, we could also fly to and start at other cities since it is Monday.)
  * 2nd week : fly from city 1 to city 2 on Monday, and play 3 days and work 4 days.
  * 3rd week : stay at city 2, and play 3 days and work 4 days.
+ *
  * Example 2:
  * Input:flights = [[0,0,0],[0,0,0],[0,0,0]], days = [[1,1,1],[7,7,7],[7,7,7]]
  * Output: 3
@@ -41,6 +42,7 @@ package leetfree;
  * Since there is no flights enable you to move to another city, you have to stay at city 0 for the whole 3 weeks.
  * For each week, you only have one day to play and six days to work.
  * So the maximum number of vacation days is 3.
+ *
  * Example 3:
  * Input:flights = [[0,1,1],[1,0,1],[1,1,0]], days = [[7,0,0],[0,7,0],[0,0,7]]
  * Output: 21

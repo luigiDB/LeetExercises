@@ -11,4 +11,15 @@ public class Node<T> {
         left = null;
         right = null;
     }
+
+    public static <T> Node<T> of(T info) {
+        return new Node<>(info);
+    }
+
+    public static <T> Node<T> of(T info, Node<T> left, Node<T> right) {
+        Node<T> node = new Node<>(info);
+        node.left = left;
+        node.right = right;
+        return node;
+    }
 }

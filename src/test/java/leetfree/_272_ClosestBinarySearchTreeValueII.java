@@ -14,13 +14,14 @@ Assume that the BST is balanced, could you solve it in less than O(n) runtime (w
 public class _272_ClosestBinarySearchTreeValueII {
 
     /**
-     *  In practise we keep a max heap of the closest values this way the space overhead is just K and the time
-     *  complexity is N since we simply read all the tree.
+     * In practise we keep a max heap of the closest values this way the space overhead is just K and the time
+     * complexity is N since we simply read all the tree.
      */
     public List<Integer> closestKValues(TreeNode root, double target, int k) {
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>();
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b-a);
 
         Queue<TreeNode> bfsQueue = new LinkedList<>();
+        bfsQueue.offer(root);
         while (!bfsQueue.isEmpty()) {
             TreeNode poll = bfsQueue.poll();
             if (maxHeap.size() < k)

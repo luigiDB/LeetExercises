@@ -6,7 +6,7 @@ _323_NumberOfConnectedComponentsInAnUndirectedGraph
 
 
 FIND implementations:
-1_ classical recursive implementation
+1_ classical iterative implementation
 private int find(int[] parent, int node) {
     int pivot = node;
     while (parent[pivot] != -1) {

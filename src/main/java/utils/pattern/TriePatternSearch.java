@@ -24,7 +24,9 @@ public class TriePatternSearch {
 
     public Collection<Integer> search(String ee) {
         List<Integer> matches = root.search(ee);
-        return (matches==null)?null:matches.stream().map(i -> i-ee.length()).collect(Collectors.toList());
+        return (matches==null)
+                ? null
+                : matches.stream().map(i -> i-ee.length()).collect(Collectors.toList());
     }
 
     class TrieNode {

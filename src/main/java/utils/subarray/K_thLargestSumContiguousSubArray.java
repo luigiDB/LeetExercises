@@ -2,7 +2,7 @@ package utils.subarray;
 
 import java.util.PriorityQueue;
 
-public class K_thLargestSumContiguousSubarray {
+public class K_thLargestSumContiguousSubArray {
 
     static public int find(int[] input, int k) {
         PriorityQueue<Integer> sums = new PriorityQueue<>();

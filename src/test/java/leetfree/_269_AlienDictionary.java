@@ -9,38 +9,18 @@ import java.util.*;
 There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you.
 You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of
 this new language. Derive the order of letters in this language.
-<p>
 Example 1:
 Given the following words in dictionary,
-<p>
-[
-"wrt",
-"wrf",
-"er",
-"ett",
-"rftt"
-]
+["wrt","wrf","er","ett","rftt"]
 The correct order is: "wertf".
-<p>
 Example 2:
 Given the following words in dictionary,
-<p>
-[
-"z",
-"x"
-]
+["z","x"]
 The correct order is: "zx".
-<p>
 Example 3:
 Given the following words in dictionary,
-<p>
-[
-"z",
-"x",
-"z"
-]
+["z","x","z"]
 The order is invalid, so return "".
-<p>
 Note:
 You may assume all letters are in lowercase.
 You may assume that if a is a prefix of b, then a must appear before b in the given dictionary.

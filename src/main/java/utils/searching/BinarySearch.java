@@ -1,6 +1,7 @@
 package utils.searching;
 
 public class BinarySearch {
+
     public static int search(int[] arr, int val) {
         int left = 0, right = arr.length - 1;
         while (left <= right) {

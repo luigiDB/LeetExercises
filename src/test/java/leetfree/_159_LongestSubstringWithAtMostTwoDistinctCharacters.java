@@ -24,26 +24,26 @@ public class _159_LongestSubstringWithAtMostTwoDistinctCharacters {
     }
 
     private int longest2CharStringSize(String input) {
-        int startPOinter = 0;
-        int endPOinter = 0;
+        int startPointer = 0;
+        int endPointer = 0;
         Map<Character, Integer> currentSubstringContent = new HashMap<>();
         int maxSize = 0;
 
-        currentSubstringContent.put(input.charAt(endPOinter), 1);
-        while (endPOinter < input.length()-1) {
-            endPOinter++;
-            char end = input.charAt(endPOinter);
+        currentSubstringContent.put(input.charAt(endPointer), 1);
+        while (endPointer < input.length()-1) {
+            endPointer++;
+            char end = input.charAt(endPointer);
             if(currentSubstringContent.containsKey(end)) {
                 currentSubstringContent.put(end, currentSubstringContent.get(end)+1);
             } else {
                 currentSubstringContent.put(end, 1);
                 while(currentSubstringContent.size() > 2) {
-                    char start = input.charAt(startPOinter);
+                    char start = input.charAt(startPointer);
                     currentSubstringContent.put(start, currentSubstringContent.get(start)-1);
                     if(currentSubstringContent.get(start) == 0 ) {
                         currentSubstringContent.remove(start);
                     }
-                    startPOinter++;
+                    startPointer++;
                 }
             }
             maxSize = Math.max(maxSize, currentSubstringContent.values().stream().mapToInt(i->i).sum());

@@ -30,8 +30,8 @@ public class TriePatternSearch {
     }
 
     class TrieNode {
-        private TrieNode[] next = new TrieNode[256];
-        private List<Integer> position = new LinkedList<>();
+        private final TrieNode[] next = new TrieNode[256];
+        private final List<Integer> position = new LinkedList<>();
 
         public List<Integer> getPosition() {
             return position;

@@ -5,9 +5,8 @@ public class DisjointSet {
      * Detect Cycle in an Undirected Graph
      */
 
-    public Edge edge[];
-    private int v;
-    private int e;
+    public Edge[] edge;
+    private final int v;
 
     class Edge {
         int src, dest;
@@ -15,7 +14,6 @@ public class DisjointSet {
 
     public DisjointSet(int v, int e) {
         this.v = v;
-        this.e = e;
         edge = new Edge[e];
         for (int i = 0; i < e; ++i)
             edge[i] = new Edge();

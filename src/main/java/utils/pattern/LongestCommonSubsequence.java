@@ -7,8 +7,8 @@ package utils.pattern;
 
 /**
  * Two possible techniques:
- * + build the tree with all the strings and determine the deepest node with all the strings compare
- * + buld the LCS matrix 2 string at the time and merge results
+ * + build the tree with all the strings and determine the deepest node with all the strings
+ * + build the LCS matrix 2 string at the time and merge results
  */
 public class LongestCommonSubsequence {
     /*

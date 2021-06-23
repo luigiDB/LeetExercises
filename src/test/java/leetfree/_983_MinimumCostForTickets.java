@@ -2,6 +2,9 @@ package leetfree;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -27,30 +30,30 @@ public class _983_MinimumCostForTickets {
         assertEquals(17, mincostTickets(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 30, 31}, new int[]{2, 7, 15}));
     }
 
-    int minCost = Integer.MAX_VALUE;
-
+    Map<Integer, Integer> memory = null;
     public int mincostTickets(int[] days, int[] costs) {
-        search(days, costs, 0, 0);
-        return minCost;
+        memory =  new HashMap<>();
+        return search(days, costs, 0, 0);
     }
 
-    private void search(int[] days, int[] costs, int index, int costSoFar) {
+    private int search(int[] days, int[] costs, int index, int costSoFar) {
 
         if (index >= days.length) {
-            minCost = Math.min(minCost, costSoFar);
-            return;
+            return costSoFar;
         }
 
-        search(days, costs, index + 1, costSoFar + costs[0]);
+        int dayCost = search(days, costs, index + 1, costSoFar + costs[0]);
 
         int currentIndex = index;
 
         while (currentIndex < days.length && days[currentIndex] < days[index] + 7)
             currentIndex++;
-        search(days, costs, currentIndex, costSoFar + costs[1]);
+        int weekCost = search(days, costs, currentIndex, costSoFar + costs[1]);
 
         while (currentIndex < days.length && days[currentIndex] < days[index] + 30)
             currentIndex++;
-        search(days, costs, currentIndex, costSoFar + costs[2]);
+        int monthCost = search(days, costs, currentIndex, costSoFar + costs[2]);
+
+        return Math.min(dayCost, Math.min(weekCost, monthCost));
     }
 }

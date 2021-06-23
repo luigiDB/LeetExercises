@@ -3,10 +3,12 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+ * Write a function to determine if a number is strobogrammatic. The number is represented as a string.
+ * For example, the numbers "69", "88", and "818" are all strobogrammatic.
+ */
 public class _246_StrobogrammaticNumber {
-    /*A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
-    Write a function to determine if a number is strobogrammatic. The number is represented as a string.
-    For example, the numbers "69", "88", and "818" are all strobogrammatic.*/
 
     @Test
     public void testTheseAreStrobogrammatic() {
@@ -16,6 +18,7 @@ public class _246_StrobogrammaticNumber {
         Assert.assertTrue(isStrobogrammatic("69"));
         Assert.assertTrue(isStrobogrammatic("6699"));
         Assert.assertTrue(isStrobogrammatic("606909"));
+        Assert.assertTrue(isStrobogrammatic("66899"));
     }
 
     @Test
@@ -23,6 +26,7 @@ public class _246_StrobogrammaticNumber {
         Assert.assertFalse(isStrobogrammatic("2"));
         Assert.assertFalse(isStrobogrammatic("3457"));
         Assert.assertFalse(isStrobogrammatic("888121888"));
+        Assert.assertFalse(isStrobogrammatic("66699"));
     }
 
     private boolean isStrobogrammatic(String number) {

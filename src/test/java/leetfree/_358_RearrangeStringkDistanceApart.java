@@ -7,23 +7,11 @@ import java.util.*;
 
 import static org.hamcrest.Matchers.contains;
 
-/*Given a non-empty string s and an integer k, rearrange the string such that the same characters are at least
-distance k from each other.
-All input strings are given in lowercase letters. If it is not possible to rearrange the string, return an empty
-string "".
-Example 1:
-s = "aabbcc", k = 3
-Result: "abcabc"
-The same letters are at least distance 3 from each other.
-Example 2:
-s = "aaabc", k = 3
-Answer: ""
-It is not possible to rearrange the string.
-Example 3:
-s = "aaadbbcc", k = 2
-Answer: "abacabcd"
-Another possible answer is: "abcabcda"
-The same letters are at least distance 2 from each other.
+/**
+ * Given a non-empty string s and an integer k, rearrange the string such that the same characters are at least
+ * distance k from each other.
+ * All input strings are given in lowercase letters. If it is not possible to rearrange the string, return an empty
+ * string.
 */
 public class _358_RearrangeStringkDistanceApart {
 
@@ -31,6 +19,12 @@ public class _358_RearrangeStringkDistanceApart {
     public void given() {
         List<String> possibleResults = List.of("abcabc", "acbacb", "bcabca", "bacbac", "cbacba", "cabcab");
         Assert.assertTrue(possibleResults.contains(rearrangeString("aabbcc", 3)));
+    }
+
+    @Test
+    public void given2() {
+        List<String> possibleResults = List.of("abacabcd", "abcabcda", "abcabcad");
+        Assert.assertTrue(possibleResults.contains(rearrangeString("aaadbbcc", 2)));
     }
 
     /*maintain an ordered ist of Pair<char, n_occurencies> ordered by freq.
@@ -44,9 +38,9 @@ public class _358_RearrangeStringkDistanceApart {
 
         StringBuilder rearranged = new StringBuilder();
         Map<Character, Integer> map = new HashMap<>();
-        for (char c : str.toCharArray()) {
+        for (char c : str.toCharArray())
             map.compute(c, (key, value) -> (value == null) ? 1 : value + 1);
-        }
+
         Queue<Map.Entry<Character, Integer>> maxHeap = new PriorityQueue<>(Map.Entry.comparingByValue(Comparator.reverseOrder()));
         maxHeap.addAll(map.entrySet());
 

@@ -3,7 +3,9 @@ package leetfree;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,14 +25,17 @@ public class _983_MinimumCostForTickets {
     @Test
     public void a() {
         assertEquals(11, mincostTickets(new int[]{1, 4, 6, 7, 8, 20}, new int[]{2, 7, 15}));
+        assertEquals(11, dpSolution(new int[]{1, 4, 6, 7, 8, 20}, new int[]{2, 7, 15}));
     }
 
     @Test
     public void b() {
         assertEquals(17, mincostTickets(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 30, 31}, new int[]{2, 7, 15}));
+        assertEquals(17, dpSolution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 30, 31}, new int[]{2, 7, 15}));
     }
 
     Map<Integer, Integer> memory;
+
     public int mincostTickets(int[] days, int[] costs) {
         memory = new HashMap<>();
         return search(days, costs, 0);
@@ -38,7 +43,7 @@ public class _983_MinimumCostForTickets {
 
     private int search(int[] days, int[] costs, int index) {
 
-        if(memory.containsKey(index))
+        if (memory.containsKey(index))
             return memory.get(index);
 
         if (index >= days.length) {
@@ -51,14 +56,36 @@ public class _983_MinimumCostForTickets {
 
         while (currentIndex < days.length && days[currentIndex] < days[index] + 7)
             currentIndex++;
-        int weekCost =  costs[1] + search(days, costs, currentIndex);
+        int weekCost = costs[1] + search(days, costs, currentIndex);
 
         while (currentIndex < days.length && days[currentIndex] < days[index] + 30)
             currentIndex++;
-        int monthCost =  costs[2] + search(days, costs, currentIndex);
+        int monthCost = costs[2] + search(days, costs, currentIndex);
 
         int minForToday = Math.min(dayCost, Math.min(weekCost, monthCost));
         memory.put(index, minForToday);
         return minForToday;
+    }
+
+    public int dpSolution(int[] days, int[] costs) {
+        Set<Integer> tripDays = new HashSet<>();
+        for (int i : days)
+            tripDays.add(i);
+
+        int[] dp = new int[367];
+
+        for (int i = 1; i < 366; i++) {
+            dp[i] = dp[i - 1];
+            if (tripDays.contains(i)) {
+                dp[i] = Math.min(
+                        dp[i - 1] + costs[0],
+                        Math.min(
+                                dp[Math.max(0, i - 7)] + costs[1],
+                                dp[Math.max(0, i - 30)] + costs[2]
+                        )
+                );
+            }
+        }
+        return dp[365];
     }
 }

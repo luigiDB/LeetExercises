@@ -30,30 +30,35 @@ public class _983_MinimumCostForTickets {
         assertEquals(17, mincostTickets(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 30, 31}, new int[]{2, 7, 15}));
     }
 
-    Map<Integer, Integer> memory = null;
+    Map<Integer, Integer> memory;
     public int mincostTickets(int[] days, int[] costs) {
-        memory =  new HashMap<>();
-        return search(days, costs, 0, 0);
+        memory = new HashMap<>();
+        return search(days, costs, 0);
     }
 
-    private int search(int[] days, int[] costs, int index, int costSoFar) {
+    private int search(int[] days, int[] costs, int index) {
+
+        if(memory.containsKey(index))
+            return memory.get(index);
 
         if (index >= days.length) {
-            return costSoFar;
+            return 0;
         }
 
-        int dayCost = search(days, costs, index + 1, costSoFar + costs[0]);
+        int dayCost = costs[0] + search(days, costs, index + 1);
 
         int currentIndex = index;
 
         while (currentIndex < days.length && days[currentIndex] < days[index] + 7)
             currentIndex++;
-        int weekCost = search(days, costs, currentIndex, costSoFar + costs[1]);
+        int weekCost =  costs[1] + search(days, costs, currentIndex);
 
         while (currentIndex < days.length && days[currentIndex] < days[index] + 30)
             currentIndex++;
-        int monthCost = search(days, costs, currentIndex, costSoFar + costs[2]);
+        int monthCost =  costs[2] + search(days, costs, currentIndex);
 
-        return Math.min(dayCost, Math.min(weekCost, monthCost));
+        int minForToday = Math.min(dayCost, Math.min(weekCost, monthCost));
+        memory.put(index, minForToday);
+        return minForToday;
     }
 }

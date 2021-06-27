@@ -111,18 +111,18 @@ public class _163_MissingRanges {
             addRange(resultingHoles, lower, nums[0] - 1);
         }
 
-        int l = nums[0];
+        int previous = nums[0];
         //middle holes
         for (int i = 1; i < nums.length; i++) {
-            if (nums[i] - l > 1) {
-                addRange(resultingHoles, l + 1, nums[i] - 1);
+            if (nums[i] - previous > 1) {
+                addRange(resultingHoles, previous + 1, nums[i] - 1);
             }
-            l = nums[i];
+            previous = nums[i];
         }
 
         //end hole
-        if(upper != l) {
-            addRange(resultingHoles, l+1, upper);
+        if(upper != previous) {
+            addRange(resultingHoles, previous+1, upper);
         }
 
         return resultingHoles;

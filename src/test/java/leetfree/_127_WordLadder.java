@@ -7,19 +7,17 @@ import org.junit.Test;
 import java.util.*;
 import java.util.concurrent.Phaser;
 
-/*
-Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation
-sequence from beginWord to endWord, such that:
-
-Only one letter can be changed at a time.
-Each transformed word must exist in the word list.
-Note:
-
-Return 0 if there is no such transformation sequence.
-All words have the same length.
-All words contain only lowercase alphabetic characters.
-You may assume no duplicates in the word list.
-You may assume beginWord and endWord are non-empty and are not the same.
+/**
+ * Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation
+ * sequence from beginWord to endWord, such that:
+ * Only one letter can be changed at a time.
+ * Each transformed word must exist in the word list.
+ * Note:
+ * Return 0 if there is no such transformation sequence.
+ * All words have the same length.
+ * All words contain only lowercase alphabetic characters.
+ * You may assume no duplicates in the word list.
+ * You may assume beginWord and endWord are non-empty and are not the same.
  */
 public class _127_WordLadder {
     @Test
@@ -41,6 +39,9 @@ public class _127_WordLadder {
 
         Queue<Pair<String, Integer>> queue = new LinkedList<>();
         queue.add(Pair.of(beginWord, 1));
+
+        // since we are traversing BFS if something has already been visited it has been visited with less steps
+        // so we can cut branches that we are already visiting
         Set<String> visited = new HashSet<>();
 
         while (!queue.isEmpty()) {

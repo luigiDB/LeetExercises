@@ -37,30 +37,24 @@ public class _129_SumRootToLeafNumbers {
         assertEquals(1026, sumNumbers(root));
     }
 
-    int sum = 0;
-
     public int sumNumbers(TreeNode root) {
-        sum = 0;
-
-        searchLeavesWithPath(root, 0);
-
-        return sum;
+        return searchLeavesWithPath(root, 0);
     }
 
-    private void searchLeavesWithPath(TreeNode root, int number) {
+    private int searchLeavesWithPath(TreeNode root, int number) {
 
         if (root == null)
-            return;
+            return 0;
 
         int numberSoFar = number * 10 + root.val;
 
-        if(root.left == null & root.right==null) {
-            sum += numberSoFar;
-            return;
+        if (root.left == null & root.right == null) {
+            return numberSoFar;
         }
 
-        searchLeavesWithPath(root.left, numberSoFar);
-        searchLeavesWithPath(root.right, numberSoFar);
+        return searchLeavesWithPath(root.left, numberSoFar)
+                + searchLeavesWithPath(root.right, numberSoFar);
+
     }
 
     public class TreeNode {

@@ -1,6 +1,10 @@
 package leetfree;
 
+import org.apache.commons.lang3.tuple.Triple;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -29,15 +33,23 @@ public class _1216_ValidPalindromeIII {
     /**
      * Too slow
      */
+    @Test
     public void d() {
-        assertFalse(isValidPalindrome("fcgihcgeadfehgiabegbiahbeadbiafgcfchbcacedbificicihibaeehbffeidiaiighceegbfdggggcfaiibefbgeegbcgeadcfdfegfghebcfceiabiagehhibiheddbcgdebdcfegaiahibcfhheggbheebfdahgcfcahafecfehgcgdabbghddeadecidicchfgicbdbecibddfcgbiadiffcifiggigdeedbiiihfgehhdegcaffaggiidiifgfigfiaiicadceefbhicfhbcachacaeiefdcchegfbifhaeafdehicfgbecahidgdagigbhiffhcccdhfdbd", 216));
+        assertTrue(isValidPalindrome("fcgihcgeadfehgiabegbiahbeadbiafgcfchbcacedbificicihibaeehbffeidiaiighceegbfdggggcfaiibefbgeegbcgeadcfdfegfghebcfceiabiagehhibiheddbcgdebdcfegaiahibcfhheggbheebfdahgcfcahafecfehgcgdabbghddeadecidicchfgicbdbecibddfcgbiadiffcifiggigdeedbiiihfgehhdegcaffaggiidiifgfigfiaiicadceefbhicfhbcachacaeiefdcchegfbifhaeafdehicfgbecahidgdagigbhiffhcccdhfdbd", 216));
     }
 
     public boolean isValidPalindrome(String s, int k) {
+        memory.clear();
         return searchKPalindrome(s, k, 0, 0, s.length() - 1);
     }
 
+    Map<Triple<Integer, Integer, Integer>, Boolean> memory = new HashMap<>();
+
     private boolean searchKPalindrome(String s, int k, int removed, int left, int right) {
+
+        Triple<Integer, Integer, Integer> memoryIndex = Triple.of(removed, left, right);
+        if (memory.containsKey(memoryIndex))
+            return memory.get(memoryIndex);
 
         if (removed > k)
             return false;
@@ -47,11 +59,16 @@ public class _1216_ValidPalindromeIII {
             right--;
         }
 
+        boolean result = false;
         if (left >= right)
-            return true;
+            result = true;
         else {
-            return searchKPalindrome(s, k, removed + 1, left + 1, right)
+            result = searchKPalindrome(s, k, removed + 1, left + 1, right)
                     || searchKPalindrome(s, k, removed + 1, left, right - 1);
         }
+
+        memory.put(memoryIndex, result);
+        return result;
     }
+
 }

@@ -3,7 +3,9 @@ package leetfree;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class _163_MissingRanges {
     /*Given a sorted integer array where the range of elements are in the inclusive range [lower, upper], return its missing ranges.
@@ -93,9 +95,17 @@ public class _163_MissingRanges {
 
     @Test
     public void testMultipleHoles() {
-        int[] example = new int[]{1,2,4,7};
+        int[] example = new int[]{1, 2, 4, 7};
         List<String> missingRanges = findMissingRanges(example, 0, 10);
         List<String> expectedResult = new LinkedList<>(Arrays.asList("0", "3", "5->6", "8->10"));
+        Assert.assertEquals(expectedResult, missingRanges);
+    }
+
+    @Test
+    public void testComplexCase() {
+        int[] example = new int[]{-1000000000, -9999, 0, 1, 2, 10, 100, 1000, 999999999, 1000000000};
+        List<String> missingRanges = findMissingRanges(example, -1000000000, 1000000000);
+        List<String> expectedResult = new LinkedList<>(Arrays.asList("-999999999->-10000","-9998->-1","3->9","11->99","101->999","1001->999999998"));
         Assert.assertEquals(expectedResult, missingRanges);
     }
 
@@ -111,8 +121,8 @@ public class _163_MissingRanges {
             addRange(resultingHoles, lower, nums[0] - 1);
         }
 
-        int previous = nums[0];
         //middle holes
+        int previous = nums[0];
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] - previous > 1) {
                 addRange(resultingHoles, previous + 1, nums[i] - 1);

@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Set;
 
 /*
 Given the root of a binary tree, find the maximum average value of any subtree of that tree.
@@ -29,7 +28,10 @@ public class _1120_MaximumAverageSubtree {
 
     @Test
     public void given() {
-        TreeNode root = new TreeNode(5, new TreeNode(6), new TreeNode(1));
+        TreeNode root = new TreeNode(5,
+                new TreeNode(6),
+                new TreeNode(1)
+        );
         Assert.assertEquals(6.0, maximumAverageSubtree(root), 0.00001);
     }
 
@@ -56,24 +58,24 @@ public class _1120_MaximumAverageSubtree {
 
     private Pair<Integer, Integer> exploreTree(TreeNode node, PriorityQueue<Double> averageSubTree) {
 
-        int lowerSum = node.val;
-        int lowerCount = 1;
+        int nodeSum = node.val;
+        int nodeCount = 1;
 
         if (node.left != null) {
             Pair<Integer, Integer> left = exploreTree(node.left, averageSubTree);
-            lowerSum += left.getLeft();
-            lowerCount += left.getRight();
+            nodeSum += left.getLeft();
+            nodeCount += left.getRight();
         }
 
         if (node.right != null) {
             Pair<Integer, Integer> right = exploreTree(node.right, averageSubTree);
-            lowerSum += right.getLeft();
-            lowerCount += right.getRight();
+            nodeSum += right.getLeft();
+            nodeCount += right.getRight();
         }
 
-        averageSubTree.offer(((double) lowerSum) / lowerCount);
+        averageSubTree.offer(((double) nodeSum) / nodeCount);
 
-        return Pair.of(lowerSum, lowerCount);
+        return Pair.of(nodeSum, nodeCount);
     }
 
     public class TreeNode {

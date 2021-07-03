@@ -37,5 +37,8 @@ public class BinarySearchTest extends TestCase {
 
         arr = new int[]{0, 0, 0, 0, 0, 2};
         assertEquals(-1, BinarySearch.lastOccurrence(arr, 1));
+
+        arr = new int[]{5,7,7,8,8,9};
+        assertEquals(4, BinarySearch.lastOccurrence(arr, 8));
     }
 }

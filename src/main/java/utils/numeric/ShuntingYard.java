@@ -26,10 +26,25 @@ public class ShuntingYard {
                 char operator = expr.charAt(index);
                 index++;
 
-                while (!operations.isEmpty() && prio(operations.peek()) >= prio(operator)) {
-                    expression.add(String.valueOf(operations.pop()));
+
+                if (operator == '(') {
+                    // push (
+                    operations.push(operator);
+                } else if (operator == ')') {
+                    // pop until the first (
+                    while (!operations.isEmpty() && operations.peek() != '(') {
+                        expression.add(String.valueOf(operations.pop()));
+                    }
+                    operations.pop();
+                } else {
+                    // pop higher priority operations until a ( is found
+                    while (!operations.isEmpty()
+                            && operations.peek() != '('
+                            && prio(operations.peek()) >= prio(operator)) {
+                        expression.add(String.valueOf(operations.pop()));
+                    }
+                    operations.push(operator);
                 }
-                operations.push(operator);
             }
         }
         while (!operations.isEmpty()) {

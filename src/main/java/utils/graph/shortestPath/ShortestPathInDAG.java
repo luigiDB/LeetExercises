@@ -3,10 +3,7 @@ package utils.graph.shortestPath;
 import utils.graph.egde.IEdge;
 import utils.graph.egde.IWeightedEdge;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -56,13 +53,10 @@ public class ShortestPathInDAG {
              * we update update the distance only if the current distance is not INF
              */
             if (distances[current] != Integer.MAX_VALUE) {
-                List<IWeightedEdge<Integer>> nexts = graph.get(current);
-                if (nexts != null) {
-                    for (IWeightedEdge<Integer> next : nexts) {
-                        if (distances[next.getNodeF()] > distances[next.getNodeS()] + next.getCost()) {
-                            distances[next.getNodeF()] = distances[next.getNodeS()] + next.getCost();
-                            previouses[next.getNodeF()] = next.getNodeS();
-                        }
+                for (IWeightedEdge<Integer> next : graph.getOrDefault(current, Collections.emptyList())) {
+                    if (distances[next.getNodeF()] > distances[next.getNodeS()] + next.getCost()) {
+                        distances[next.getNodeF()] = distances[next.getNodeS()] + next.getCost();
+                        previouses[next.getNodeF()] = next.getNodeS();
                     }
                 }
             }
@@ -71,10 +65,10 @@ public class ShortestPathInDAG {
 
     private Stack<Integer> topologicalSort() {
         Stack<Integer> stack = new Stack<>();
-        boolean visited[] = new boolean[vertexes.length];
-        for (int j = 0; j < vertexes.length; j++) {
-            if (!visited[j])
-                topologicalSortDiscovery(j, visited, stack);
+        boolean[] visited = new boolean[vertexes.length];
+        for (int i = 0; i < vertexes.length; i++) {
+            if (!visited[i])
+                topologicalSortDiscovery(i, visited, stack);
         }
 
         return stack;
@@ -83,14 +77,12 @@ public class ShortestPathInDAG {
     private void topologicalSortDiscovery(int i, boolean[] visited, Stack<Integer> stack) {
         visited[i] = true;
 
-        List<IWeightedEdge<Integer>> nexts = graph.get(i);
-        if (nexts != null) {
-            for (IEdge<Integer> next : nexts) {
-                if (!visited[next.getNodeF()]) {
-                    topologicalSortDiscovery(next.getNodeF(), visited, stack);
-                }
+        for (IEdge<Integer> next : graph.getOrDefault(i, Collections.emptyList())) {
+            if (!visited[next.getNodeF()]) {
+                topologicalSortDiscovery(next.getNodeF(), visited, stack);
             }
         }
+
         stack.push(i);
     }
 

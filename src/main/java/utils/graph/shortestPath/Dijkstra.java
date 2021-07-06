@@ -30,7 +30,9 @@ public class Dijkstra<T> {
         );
     }
 
-    public List<Integer> getDistances() { return Arrays.asList(distances); }
+    public List<Integer> getDistances() {
+        return Arrays.asList(distances);
+    }
 
     public List<Integer> getPreviouses() {
         return Arrays.asList(previouses);
@@ -51,18 +53,17 @@ public class Dijkstra<T> {
         while (!priorityQueue.isEmpty()) {
             IWeightedEdge<T> poll = priorityQueue.poll();
 
-            List<IWeightedEdge<T>> nextEdges = graph.get(poll.getNodeF());
-            if (nextEdges != null)
-                for (IWeightedEdge<T> edge : nextEdges) {
-                    int indexOfNextVertex = Arrays.asList(vertexes).indexOf(edge.getNodeF());
-                    int indexOfCurrentVertex = Arrays.asList(vertexes).indexOf(edge.getNodeS());
+            List<IWeightedEdge<T>> nextEdges = graph.getOrDefault(poll.getNodeF(), Collections.emptyList());
+            for (IWeightedEdge<T> edge : nextEdges) {
+                int indexOfNextVertex = Arrays.asList(vertexes).indexOf(edge.getNodeF());
+                int indexOfCurrentVertex = Arrays.asList(vertexes).indexOf(edge.getNodeS());
 
-                    if (distances[indexOfNextVertex] > distances[indexOfCurrentVertex] + edge.getCost()) {
-                        distances[indexOfNextVertex] = distances[indexOfCurrentVertex] + edge.getCost();
-                        previouses[indexOfNextVertex] = indexOfCurrentVertex;
-                        priorityQueue.add(edge);
-                    }
+                if (distances[indexOfNextVertex] > distances[indexOfCurrentVertex] + edge.getCost()) {
+                    distances[indexOfNextVertex] = distances[indexOfCurrentVertex] + edge.getCost();
+                    previouses[indexOfNextVertex] = indexOfCurrentVertex;
+                    priorityQueue.add(edge);
                 }
+            }
         }
     }
 }

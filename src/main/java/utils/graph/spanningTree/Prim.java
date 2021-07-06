@@ -32,8 +32,6 @@ public class Prim<T> {
     public List<WeightedUndirectedEdge<T>> mst() {
         List<WeightedUndirectedEdge<T>> returnList = new LinkedList<>();
 
-        int[] distances = new int[vertexes.length];
-        Arrays.fill(distances, Integer.MAX_VALUE);
         Set<T> visited = new HashSet<>();
         Queue<WeightedUndirectedEdge<T>> heap = new PriorityQueue<>(Comparator.comparingInt(WeightedUndirectedEdge::getCost));
 

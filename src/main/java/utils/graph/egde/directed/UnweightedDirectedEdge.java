@@ -14,12 +14,12 @@ public class UnweightedDirectedEdge<T> implements IEdge<T> {
         this.nodeF = nodeF;
     }
 
-    public static UnweightedDirectedEdge createEdge(char nodeS, char nodeF) {
-        return new UnweightedDirectedEdge(nodeS, nodeF);
+    public static UnweightedDirectedEdge<Character> createEdge(char nodeS, char nodeF) {
+        return new UnweightedDirectedEdge<>(nodeS, nodeF);
     }
 
-    public static UnweightedDirectedEdge createEdge(int nodeS, int nodeF) {
-        return new UnweightedDirectedEdge(nodeS, nodeF);
+    public static UnweightedDirectedEdge<Integer> createEdge(int nodeS, int nodeF) {
+        return new UnweightedDirectedEdge<>(nodeS, nodeF);
     }
 
     @Override

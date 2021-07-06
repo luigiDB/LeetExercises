@@ -36,12 +36,9 @@ public class TopologicalSort<T> {
     private void topologicalSort(T node, Stack<T> result, Set<T> visited) {
         visited.add(node);
 
-        List<IEdge<T>> nexts = graph.get(node);
-        if(nexts != null) {
-            for(IEdge<T> next : nexts) {
-                if(!visited.contains(next.getNodeF())){
-                    topologicalSort(next.getNodeF(), result, visited);
-                }
+        for (IEdge<T> next : graph.getOrDefault(node, Collections.emptyList())) {
+            if (!visited.contains(next.getNodeF())) {
+                topologicalSort(next.getNodeF(), result, visited);
             }
         }
         result.push(node);

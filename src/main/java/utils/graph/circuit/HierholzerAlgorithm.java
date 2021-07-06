@@ -2,10 +2,7 @@ package utils.graph.circuit;
 
 import utils.graph.egde.IEdge;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -41,11 +38,11 @@ public class HierholzerAlgorithm {
             IEdge<Integer> pop = forward.pop();
             backtrack.push(pop);
 
-            straightforwardWalk(pop.getNodeS(),forward);
+            straightforwardWalk(pop.getNodeS(), forward);
         }
 
         List<Integer> path = new LinkedList<>();
-        while(!backtrack.isEmpty()){
+        while (!backtrack.isEmpty()) {
             path.add(backtrack.pop().getNodeS());
         }
         return path;
@@ -60,14 +57,13 @@ public class HierholzerAlgorithm {
     }
 
     private IEdge<Integer> getNext(Integer nodeF) {
-        List<IEdge<Integer>> edges = graph.get(nodeF);
-        if (edges != null) {
-            if (edges.size() > 0) {
-                IEdge<Integer> edge = edges.get(0);
-                edges.remove(edge);
-                return edge;
-            }
+        List<IEdge<Integer>> edges = graph.getOrDefault(nodeF, Collections.emptyList());
+        if (edges.size() > 0) {
+            IEdge<Integer> edge = edges.get(0);
+            edges.remove(edge);
+            return edge;
         }
+
         return null;
     }
 

@@ -2,6 +2,7 @@ package utils.graph.topologicalSort;
 
 import utils.graph.egde.IEdge;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -42,11 +43,8 @@ public class KhanAlgorithm {
     private int[] evaluateStartingFanIn() {
         int[] fanIn = new int[nodes.length];
         for (Integer node : nodes) {
-            List<IEdge<Integer>> nexts = graph.get(node);
-            if (nexts != null) {
-                for (IEdge<Integer> next : nexts) {
-                    fanIn[next.getNodeF()]++;
-                }
+            for (IEdge<Integer> next : graph.getOrDefault(node, Collections.emptyList())) {
+                fanIn[next.getNodeF()]++;
             }
         }
         return fanIn;
@@ -64,11 +62,8 @@ public class KhanAlgorithm {
             if (!visited[i] && fanIn[i] == 0) {
                 visitOrder.add(i);
                 visited[i] = true;
-                List<IEdge<Integer>> nexts = graph.get(nodes[i]);
-                if (nexts != null) {
-                    for (IEdge<Integer> next : nexts) {
-                        fanIn[next.getNodeF()]--;
-                    }
+                for (IEdge<Integer> next : graph.getOrDefault(nodes[i], Collections.emptyList())) {
+                    fanIn[next.getNodeF()]--;
                 }
             }
         }

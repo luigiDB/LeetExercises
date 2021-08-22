@@ -28,7 +28,7 @@ public class BinarySearch {
                 left = pivot + 1;
             }
         }
-        if(left >=arr.length || arr[left] != val)
+        if (left >= arr.length || arr[left] != val)
             return -1;
         else
             return left;
@@ -46,7 +46,7 @@ public class BinarySearch {
                 right = pivot - 1;
         }
 
-        if(right >=arr.length || arr[right] != val)
+        if (right >= arr.length || arr[right] != val)
             return -1;
         else
             return right;

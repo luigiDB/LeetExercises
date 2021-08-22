@@ -1,8 +1,12 @@
 package leetfree;
 
+import org.junit.Test;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Given a string s of '(' , ')' and lowercase English characters.
@@ -14,6 +18,18 @@ import java.util.Stack;
  * It can be written as (A), where A is a valid string.
  */
 public class _1249_MinimumRemoveToMakeValidParentheses {
+
+    @Test
+    public void a() {assertEquals("lee(t(c)o)de", minRemoveToMakeValid("lee(t(c)o)de)"));}
+
+    @Test
+    public void b() {assertEquals("ab(c)d", minRemoveToMakeValid("a)b(c)d"));}
+
+    @Test
+    public void c() {assertEquals("", minRemoveToMakeValid("))(("));}
+
+    @Test
+    public void d() {assertEquals("a(b(c)d)", minRemoveToMakeValid("(a(b(c)d)"));}
 
     public String minRemoveToMakeValid(String s) {
         Set<Integer> indexesToRemove = new HashSet<>();
